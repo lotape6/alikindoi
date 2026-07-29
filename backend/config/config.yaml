@@ -11,17 +11,18 @@ app:
 
 # Anti-ban settings. MINIMUMS ARE ENFORCED: values below the floor are
 # rejected at load time so the config can't accidentally nuke rate limits.
+# All periods are fractions of a day: shortest allowed is 4 runs/day (6h).
 rate_limits:
   # Minimum minutes between runs per source (hard floors, do not lower)
   min_interval_minutes:
-    indeed: 30
-    google: 30
-    linkedin: 720      # LinkedIn is aggressive: >= 12h
-    glassdoor: 120
-    zip_recruiter: 120
-    adzuna: 15
-    remotive: 15
-    themuse: 15
+    indeed: 360        # 4x/day
+    google: 360
+    linkedin: 720      # 2x/day — LinkedIn is aggressive
+    glassdoor: 360
+    zip_recruiter: 360
+    adzuna: 360
+    remotive: 360
+    themuse: 360
   # Random extra delay between individual searches (seconds)
   jitter_seconds_min: 2
   jitter_seconds_max: 8
@@ -56,7 +57,7 @@ search_profiles:
     tags: ["python", "software", "developer"]
     results_wanted: 25
     hours_old: 72            # only fresh postings -> fewer requests
-    interval_minutes: 360    # every 6h (>= per-source floors enforced)
+    runs_per_day: 4          # every 6h (max frequency)
 
   - name: "cpp-developer"
     enabled: true
@@ -70,7 +71,7 @@ search_profiles:
     tags: ["c++", "software", "developer"]
     results_wanted: 25
     hours_old: 72
-    interval_minutes: 360
+    runs_per_day: 4
 
   - name: "c-developer"
     enabled: true
@@ -84,7 +85,7 @@ search_profiles:
     tags: ["c", "embedded", "software", "developer"]
     results_wanted: 25
     hours_old: 72
-    interval_minutes: 360
+    runs_per_day: 4
 
   - name: "malaga-cadiz-onsite-hybrid"
     enabled: true
@@ -98,7 +99,7 @@ search_profiles:
     tags: ["python", "c++", "c", "software", "malaga", "cadiz", "hybrid", "onsite"]
     results_wanted: 25
     hours_old: 168           # 1 week — on-site markets move slower
-    interval_minutes: 720    # every 12h
+    runs_per_day: 2          # every 12h
 
 # Notification rules (Phase 6). Delivery channels configured via .env.
 notifications:

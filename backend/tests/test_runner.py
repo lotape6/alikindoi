@@ -24,8 +24,20 @@ class FakeAdapter(BaseAdapter):
         return self._posts
 
 
-def _profile(name="test-profile", interval=360):
-    return SearchProfile(name=name, search_term="python", interval_minutes=interval)
+def _profile(name="test-profile", runs_per_day=2):
+    return SearchProfile(name=name, search_term="python", runs_per_day=runs_per_day)
+
+
+class TestRunsPerDay:
+    def test_invalid_frequency_rejected(self):
+        import pytest
+
+        with pytest.raises(ValueError, match="shortest allowed period"):
+            SearchProfile(name="x", search_term="y", runs_per_day=3)
+
+    def test_interval_computed(self):
+        assert SearchProfile(name="x", search_term="y", runs_per_day=4).interval_minutes == 360
+        assert SearchProfile(name="x", search_term="y", runs_per_day=1).interval_minutes == 1440
 
 
 class TestRateLimiting:
@@ -48,7 +60,7 @@ class TestRateLimiting:
             SourceRun(
                 source="indeed",
                 profile_name="test-profile",
-                last_run_at=datetime.now(UTC) - timedelta(minutes=120),
+                last_run_at=datetime.now(UTC) - timedelta(minutes=400),
             )
         )
         session.commit()

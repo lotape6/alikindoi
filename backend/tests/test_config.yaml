@@ -5,7 +5,7 @@ app:
 
 rate_limits:
   min_interval_minutes:
-    indeed: 30
+    indeed: 360
   jitter_seconds_min: 1
   jitter_seconds_max: 2
   max_results_per_source: 100
@@ -28,7 +28,7 @@ search_profiles:
     tags: ["python", "malaga"]
     results_wanted: 25
     hours_old: 72
-    interval_minutes: 360
+    runs_per_day: 2
 
 notifications:
   on_new_job: true

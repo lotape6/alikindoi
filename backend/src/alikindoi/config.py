@@ -15,16 +15,20 @@ from dotenv import load_dotenv
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 # Hard floors (minutes). Never lower these — they exist to avoid bans.
+# All periods are fractions of a day: the shortest allowed period is
+# 4 runs/day (every 6h); LinkedIn's floor is 2 runs/day (every 12h).
 HARD_MIN_INTERVALS: dict[str, int] = {
-    "indeed": 30,
-    "google": 30,
+    "indeed": 360,
+    "google": 360,
     "linkedin": 720,
-    "glassdoor": 120,
-    "zip_recruiter": 120,
-    "adzuna": 15,
-    "remotive": 15,
-    "themuse": 15,
+    "glassdoor": 360,
+    "zip_recruiter": 360,
+    "adzuna": 360,
+    "remotive": 360,
+    "themuse": 360,
 }
+
+RUNS_PER_DAY_CHOICES = (1, 2, 4)  # fractions of a day: daily, 12h, 6h
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_CONFIG_PATH = REPO_ROOT / "backend" / "config" / "config.yaml"
@@ -75,7 +79,21 @@ class SearchProfile(BaseModel):
     tags: list[str] = Field(default_factory=list)
     results_wanted: int = 25
     hours_old: int | None = None
-    interval_minutes: int = 360
+    runs_per_day: int = 2  # 1 = daily, 2 = every 12h, 4 = every 6h (max)
+
+    @field_validator("runs_per_day")
+    @classmethod
+    def valid_runs_per_day(cls, v: int) -> int:
+        if v not in RUNS_PER_DAY_CHOICES:
+            raise ValueError(
+                f"runs_per_day must be one of {RUNS_PER_DAY_CHOICES} "
+                "(4/day = every 6h is the shortest allowed period)"
+            )
+        return v
+
+    @property
+    def interval_minutes(self) -> int:
+        return 1440 // self.runs_per_day
 
     @field_validator("results_wanted")
     @classmethod
@@ -135,7 +153,7 @@ def _save_yaml(raw: dict) -> None:
 
 
 PROFILE_EDITABLE_FIELDS = {
-    "enabled", "interval_minutes", "results_wanted", "hours_old",
+    "enabled", "runs_per_day", "results_wanted", "hours_old",
     "search_term", "google_search_term", "location", "country_indeed",
     "adzuna_country", "is_remote", "job_type", "tags",
 }

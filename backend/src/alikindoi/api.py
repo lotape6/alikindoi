@@ -88,6 +88,20 @@ class JobPatch(BaseModel):
         "new", "saved", "applied", "interviewing", "offer", "rejected", "withdrawn"
     ] | None = None
     app_notes: str | None = None
+    # User-editable descriptive fields (manual corrections)
+    title: str | None = None
+    company: str | None = None
+    city: str | None = None
+    region: str | None = None
+    country: str | None = None
+    remote_type: Literal["remote", "hybrid", "onsite", "unknown"] | None = None
+    job_type: str | None = None
+    seniority: Literal["junior", "mid", "senior", "lead"] | None = None
+    salary_min: float | None = None
+    salary_max: float | None = None
+    salary_currency: str | None = None
+    salary_interval: Literal["yearly", "monthly", "weekly", "daily", "hourly"] | None = None
+    tags: list[str] | None = None
 
 
 class JobListOut(BaseModel):
@@ -212,8 +226,70 @@ def update_job(job_id: int, patch: JobPatch, db: DbSession) -> JobDetail:
         )
     if patch.app_notes is not None:
         job.app_notes = patch.app_notes
+
+    # Manual field corrections — each change is audited as an 'edited' event
+    from alikindoi.enrichment import annualize
+
+    for field in (
+        "title", "company", "city", "region", "country", "remote_type",
+        "job_type", "seniority", "salary_min", "salary_max",
+        "salary_currency", "salary_interval",
+    ):
+        new_value = getattr(patch, field)
+        if new_value is not None and new_value != getattr(job, field):
+            job.events.append(
+                JobEvent(
+                    event_type="edited",
+                    payload={"field": field, "from": getattr(job, field), "to": new_value},
+                )
+            )
+            setattr(job, field, new_value)
+    if any(
+        getattr(patch, f) is not None
+        for f in ("salary_min", "salary_max", "salary_interval")
+    ):
+        job.salary_annual_min = annualize(job.salary_min, job.salary_interval)
+        job.salary_annual_max = annualize(job.salary_max, job.salary_interval)
+
+    if patch.tags is not None:
+        new_tags = {t.lower().strip() for t in patch.tags if t.strip()}
+        old_tags = {t.tag for t in job.tags}
+        if new_tags != old_tags:
+            for tag in old_tags - new_tags:
+                db.query(JobTag).filter_by(job_id=job.id, tag=tag).delete()
+            for tag in new_tags - old_tags:
+                db.add(JobTag(job_id=job.id, tag=tag))
+            job.events.append(
+                JobEvent(
+                    event_type="edited",
+                    payload={"field": "tags", "from": sorted(old_tags), "to": sorted(new_tags)},
+                )
+            )
     db.commit()
     return get_job(job_id, db)
+
+
+@app.get("/api/events")
+def list_events(db: DbSession, limit: int = Query(100, ge=1, le=500)) -> list[dict]:
+    """Global activity feed: latest events across all jobs."""
+    rows = db.execute(
+        select(JobEvent, Job.title, Job.company)
+        .join(Job, JobEvent.job_id == Job.id)
+        .order_by(JobEvent.id.desc())
+        .limit(limit)
+    ).all()
+    return [
+        {
+            "id": e.id,
+            "job_id": e.job_id,
+            "job_title": title,
+            "job_company": company,
+            "event_type": e.event_type,
+            "payload": e.payload,
+            "created_at": e.created_at,
+        }
+        for e, title, company in rows
+    ]
 
 
 @app.get("/api/tags")
@@ -315,7 +391,7 @@ def list_runs(db: DbSession, limit: int = Query(50, ge=1, le=500)) -> list[dict]
 
 class ProfilePatch(BaseModel):
     enabled: bool | None = None
-    interval_minutes: int | None = None
+    runs_per_day: int | None = None
     results_wanted: int | None = None
     hours_old: int | None = None
     search_term: str | None = None
@@ -341,7 +417,12 @@ class ProfileCreate(BaseModel):
     tags: list[str] = []
     results_wanted: int = 25
     hours_old: int | None = None
-    interval_minutes: int = 360
+    runs_per_day: int = 2
+
+
+def _profile_out(p) -> dict:  # type: ignore[no-untyped-def]
+    """Profile dict including the computed interval for display."""
+    return {**p.model_dump(), "interval_minutes": p.interval_minutes}
 
 
 @app.post("/api/config/profiles", status_code=201)
@@ -354,7 +435,7 @@ def create_profile(profile: ProfileCreate) -> dict:
         raise HTTPException(422, str(exc)) from None
     for p in cfg.search_profiles:
         if p.name == profile.name:
-            return p.model_dump()
+            return _profile_out(p)
     raise HTTPException(500, "Profile not created")
 
 
@@ -478,7 +559,7 @@ def get_runtime_config() -> dict:
 
     cfg = get_config()
     return {
-        "search_profiles": [p.model_dump() for p in cfg.search_profiles],
+        "search_profiles": [_profile_out(p) for p in cfg.search_profiles],
         "rate_limits": cfg.rate_limits.model_dump(),
         "sources": cfg.sources,
         "notifications": cfg.notifications.model_dump(),
@@ -499,7 +580,7 @@ def update_profile(name: str, patch: ProfilePatch) -> dict:
         raise HTTPException(422, str(exc)) from None
     for p in cfg.search_profiles:
         if p.name == name:
-            return p.model_dump()
+            return _profile_out(p)
     raise HTTPException(404, f"Profile '{name}' not found")
 
 

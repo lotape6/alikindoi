@@ -93,6 +93,28 @@ class TestJobDetailAndPatch:
         resp = client.patch(f"/api/jobs/{job_id}", json={"app_status": "bogus"})
         assert resp.status_code == 422
 
+    def test_patch_field_edits_audited(self, client):
+        job_id = client.get("/api/jobs").json()["items"][0]["id"]
+        resp = client.patch(f"/api/jobs/{job_id}", json={
+            "city": "Cádiz", "seniority": "lead", "salary_min": 3000,
+            "salary_interval": "monthly", "tags": ["python", "remote"],
+        })
+        assert resp.status_code == 200
+        detail = resp.json()
+        assert detail["city"] == "Cádiz"
+        assert detail["seniority"] == "lead"
+        assert detail["salary_annual_min"] == 36000  # re-annualized
+        assert set(detail["tags"]) == {"python", "remote"}
+        edited = [e for e in detail["events"] if e["event_type"] == "edited"]
+        edited_fields = {e["payload"]["field"] for e in edited}
+        assert {"city", "seniority", "salary_min", "salary_interval", "tags"} <= edited_fields
+
+    def test_events_feed(self, client):
+        events = client.get("/api/events").json()
+        assert len(events) >= 3
+        assert events[0]["job_title"]
+        assert events[0]["event_type"]
+
     def test_404(self, client):
         assert client.get("/api/jobs/9999").status_code == 404
 

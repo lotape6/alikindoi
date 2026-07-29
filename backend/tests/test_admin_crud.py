@@ -71,7 +71,7 @@ class TestSources:
         indeed = next(s for s in sources if s["name"] == "indeed")
         assert indeed["kind"] == "scraper"
         assert indeed["enabled"] is True
-        assert indeed["min_interval_minutes"] == 30
+        assert indeed["min_interval_minutes"] == 360  # 4x/day floor
         adzuna = next(s for s in sources if s["name"] == "adzuna")
         assert adzuna["kind"] == "api"
         assert adzuna["available"] is False  # no keys in tests

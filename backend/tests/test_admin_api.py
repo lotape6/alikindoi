@@ -61,17 +61,17 @@ class TestConfigEndpoints:
     def test_patch_profile_persists(self, client):
         resp = client.patch(
             "/api/config/profiles/test-profile",
-            json={"enabled": False, "interval_minutes": 480},
+            json={"enabled": False, "runs_per_day": 4},
         )
         assert resp.status_code == 200
         data = resp.json()
         assert data["enabled"] is False
-        assert data["interval_minutes"] == 480
+        assert data["runs_per_day"] == 4
 
         # Persisted to YAML and config cache reloaded
         data = client.get("/api/config").json()
         assert data["search_profiles"][0]["enabled"] is False
-        assert data["search_profiles"][0]["interval_minutes"] == 480
+        assert data["search_profiles"][0]["runs_per_day"] == 4
 
     def test_patch_unknown_profile_404(self, client):
         resp = client.patch(
