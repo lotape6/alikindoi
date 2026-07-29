@@ -4,11 +4,14 @@ import { fetchJobs, type JobFilters } from './api'
 import StatsBar from './components/StatsBar'
 import FilterBar from './components/FilterBar'
 import JobsTable from './components/JobsTable'
+import KanbanBoard from './components/KanbanBoard'
 import JobDetail from './components/JobDetail'
 import AdminPanel from './components/AdminPanel'
+import ActivityFeed from './components/ActivityFeed'
 
 export default function App() {
-  const [view, setView] = useState<'jobs' | 'admin'>('jobs')
+  const [view, setView] = useState<'jobs' | 'activity' | 'admin'>('jobs')
+  const [display, setDisplay] = useState<'table' | 'board'>('table')
   const [filters, setFilters] = useState<JobFilters>({ page: 1, page_size: 50 })
   const [selectedId, setSelectedId] = useState<number | null>(null)
 
@@ -39,7 +42,7 @@ export default function App() {
           Alikindoi <span className="text-slate-400 font-normal">— job tracker</span>
         </h1>
         <nav className="flex gap-2">
-          {(['jobs', 'admin'] as const).map((v) => (
+          {(['jobs', 'activity', 'admin'] as const).map((v) => (
             <button
               key={v}
               onClick={() => setView(v)}
@@ -47,7 +50,7 @@ export default function App() {
                 view === v ? 'bg-indigo-700' : 'bg-slate-800 hover:bg-slate-700'
               }`}
             >
-              {v === 'jobs' ? '💼 Jobs' : '⚙️ Scraping'}
+              {v === 'jobs' ? '💼 Jobs' : v === 'activity' ? '🕒 Activity' : '⚙️ Scraping'}
             </button>
           ))}
         </nav>
@@ -56,6 +59,8 @@ export default function App() {
       <main className="px-6 py-4 space-y-4">
         {view === 'admin' ? (
           <AdminPanel />
+        ) : view === 'activity' ? (
+          <ActivityFeed onSelect={setSelectedId} />
         ) : (
           <>
             <StatsBar onNewOnly={() => update({ new_only: !filters.new_only, removed: false })} />
@@ -65,14 +70,33 @@ export default function App() {
             {isError && <p className="text-red-400">Error: {(error as Error).message}</p>}
             {data && (
               <>
-                <p className="text-sm text-slate-400">{data.total} jobs</p>
-                <JobsTable
-                  jobs={data.items}
-                  onSelect={setSelectedId}
-                  sortBy={filters.sort_by}
-                  sortDir={filters.sort_dir}
-                  onSort={onSort}
-                />
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-slate-400">{data.total} jobs</p>
+                  <div className="flex gap-1 text-sm">
+                    {(['table', 'board'] as const).map((d) => (
+                      <button
+                        key={d}
+                        onClick={() => setDisplay(d)}
+                        className={`px-3 py-1 rounded ${
+                          display === d ? 'bg-indigo-700' : 'bg-slate-800 hover:bg-slate-700'
+                        }`}
+                      >
+                        {d === 'table' ? '☰ Table' : '▦ Board'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                {display === 'table' ? (
+                  <JobsTable
+                    jobs={data.items}
+                    onSelect={setSelectedId}
+                    sortBy={filters.sort_by}
+                    sortDir={filters.sort_dir}
+                    onSort={onSort}
+                  />
+                ) : (
+                  <KanbanBoard jobs={data.items} onSelect={setSelectedId} />
+                )}
                 <div className="flex items-center gap-3 text-sm">
                   <button
                     className="px-3 py-1 rounded bg-slate-800 disabled:opacity-40"

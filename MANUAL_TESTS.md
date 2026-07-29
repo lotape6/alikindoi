@@ -31,6 +31,16 @@ human/browser. Check them off as you go.
       (ok / skipped_rate_limit / failed) and found/new/removed counts
 - [ ] Run twice quickly → second run's sources show `skipped_rate_limit`
 
+## 1c. Board view, editing & activity
+
+- [ ] Jobs tab → "▦ Board": drag a card from 🆕 New to 📨 Applied → it moves
+      and persists after reload
+- [ ] Open a job → "Details (editable)": change seniority, workplace, city,
+      salary (set 3000 monthly → shows ≈ 36,000/yr), add/remove a tag → each
+      change appears in History as "✏️ Edited by you (field: old → new)"
+- [ ] 🕒 Activity tab shows the global feed (discoveries, removals, edits);
+      clicking an entry opens the job
+
 ## 2. Tracking / sync over time (needs 2+ scrape runs, e.g. next day)
 
 - [ ] Run `python -m alikindoi scrape` again (or let the scheduler tick):

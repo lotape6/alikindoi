@@ -68,7 +68,7 @@ function ProfileRow({
           ))}
         </div>
       </td>
-      <td className="px-3 py-2 text-slate-400">{profile.interval_minutes} min</td>
+      <td className="px-3 py-2 text-slate-400">{profile.runs_per_day}×/day</td>
       <td className="px-3 py-2 text-slate-400">{profile.results_wanted}</td>
       <td className="px-3 py-2 text-slate-400">{profile.hours_old ?? '—'}h</td>
       <td className="px-3 py-2 whitespace-nowrap">
@@ -151,7 +151,7 @@ export default function AdminPanel() {
           <table className="w-full text-sm">
             <thead className="bg-slate-900 text-slate-400 text-left">
               <tr>
-                {['On', 'Profile', 'Query', 'Tags', 'Every', 'Results', 'Fresh', ''].map((h) => (
+                {['On', 'Profile', 'Query', 'Tags', 'Freq', 'Results', 'Fresh', ''].map((h) => (
                   <th key={h} className="px-3 py-2 font-medium">
                     {h}
                   </th>

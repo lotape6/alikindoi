@@ -54,6 +54,7 @@ class JobOut(BaseModel):
     salary_min: float | None
     salary_max: float | None
     salary_currency: str | None
+    salary_interval: str | None
     salary_annual_min: float | None
     salary_annual_max: float | None
     date_posted: str | None

@@ -15,7 +15,7 @@ const EMPTY: Partial<SearchProfile> = {
   tags: [],
   results_wanted: 25,
   hours_old: 72,
-  interval_minutes: 360,
+  runs_per_day: 2,
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
@@ -178,14 +178,16 @@ export default function ProfileEditor({
               }
             />
           </Field>
-          <Field label="Run every (minutes)">
-            <input
-              type="number"
+          <Field label="Runs per day">
+            <select
               className={inputCls}
-              value={form.interval_minutes ?? 360}
-              min={15}
-              onChange={(e) => set('interval_minutes', Number(e.target.value))}
-            />
+              value={form.runs_per_day ?? 2}
+              onChange={(e) => set('runs_per_day', Number(e.target.value))}
+            >
+              <option value={1}>1× / day (every 24h)</option>
+              <option value={2}>2× / day (every 12h)</option>
+              <option value={4}>4× / day (every 6h — max)</option>
+            </select>
           </Field>
           <Field label="Enabled">
             <div className="mt-2">

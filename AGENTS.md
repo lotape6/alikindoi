@@ -51,9 +51,12 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
 
 ## Conventions & rules
 - Never hard-delete jobs; tombstone via `is_active=False` + `job_events` entry.
-- Every mutation of a job writes a `job_events` row (audit trail).
+- Every mutation of a job (incl. user edits via PATCH) writes a `job_events`
+  row (audit trail). User edits use the `edited` event type.
 - Anti-ban is a hard requirement: per-source rate limits, jitter, backoff on
   429/403, configurable cadence with enforced safe minimums. Do not bypass.
+- Periodicity is expressed as `runs_per_day` (1/2/4); 4×/day (6h) is the
+  hard floor for all sources, LinkedIn 2×/day (12h).
 - API keys only via `.env` (never committed; `.env.example` documents them).
 - Phases: 1 scaffold ✅, 2 core engine (DB/adapters/sync/CLI) ✅,
   3 scheduler+rate limiting ✅, 4 REST API ✅, 5 dashboard ✅,

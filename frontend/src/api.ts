@@ -16,6 +16,7 @@ export interface Job {
   salary_min: number | null
   salary_max: number | null
   salary_currency: string | null
+  salary_interval: string | null
   salary_annual_min: number | null
   salary_annual_max: number | null
   date_posted: string | null
@@ -100,10 +101,25 @@ export const fetchFilterOptions = (): Promise<{
   app_statuses: string[]
 }> => get('/api/filters')
 
-export async function patchJob(
-  id: number,
-  patch: { app_status?: string; app_notes?: string },
-): Promise<JobDetail> {
+export interface JobPatch {
+  app_status?: string
+  app_notes?: string
+  title?: string
+  company?: string
+  city?: string
+  region?: string
+  country?: string
+  remote_type?: string
+  job_type?: string
+  seniority?: string
+  salary_min?: number
+  salary_max?: number
+  salary_currency?: string
+  salary_interval?: string
+  tags?: string[]
+}
+
+export async function patchJob(id: number, patch: JobPatch): Promise<JobDetail> {
   const res = await fetch(`/api/jobs/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
@@ -112,6 +128,18 @@ export async function patchJob(
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
   return res.json()
 }
+
+export interface ActivityEvent {
+  id: number
+  job_id: number
+  job_title: string
+  job_company: string
+  event_type: string
+  payload: Record<string, unknown> | null
+  created_at: string
+}
+
+export const fetchEvents = (): Promise<ActivityEvent[]> => get('/api/events?limit=100')
 
 // ---------- Admin ----------
 
@@ -142,6 +170,7 @@ export interface SearchProfile {
   tags: string[]
   results_wanted: number
   hours_old: number | null
+  runs_per_day: number
   interval_minutes: number
 }
 
