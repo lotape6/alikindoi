@@ -21,6 +21,14 @@ export default function App() {
   const update = (patch: Partial<JobFilters>) =>
     setFilters((f) => ({ ...f, ...patch, page: 1 }))
 
+  const onSort = (column: string) =>
+    setFilters((f) => ({
+      ...f,
+      sort_by: column,
+      sort_dir: f.sort_by === column && f.sort_dir === 'desc' ? 'asc' : 'desc',
+      page: 1,
+    }))
+
   const totalPages = data ? Math.max(1, Math.ceil(data.total / (filters.page_size ?? 50))) : 1
 
   return (
@@ -57,7 +65,13 @@ export default function App() {
             {data && (
               <>
                 <p className="text-sm text-slate-400">{data.total} jobs</p>
-                <JobsTable jobs={data.items} onSelect={setSelectedId} />
+                <JobsTable
+                  jobs={data.items}
+                  onSelect={setSelectedId}
+                  sortBy={filters.sort_by}
+                  sortDir={filters.sort_dir}
+                  onSort={onSort}
+                />
                 <div className="flex items-center gap-3 text-sm">
                   <button
                     className="px-3 py-1 rounded bg-slate-800 disabled:opacity-40"

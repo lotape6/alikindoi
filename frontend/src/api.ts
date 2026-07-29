@@ -54,6 +54,8 @@ export interface JobFilters {
   removed?: boolean
   new_only?: boolean
   has_salary?: boolean
+  sort_by?: string
+  sort_dir?: 'asc' | 'desc'
   page?: number
   page_size?: number
 }
@@ -133,6 +135,8 @@ export interface SearchProfile {
   search_term: string
   google_search_term: string | null
   location: string | null
+  country_indeed: string
+  adzuna_country: string
   is_remote: boolean | null
   job_type: string | null
   tags: string[]
@@ -183,5 +187,51 @@ export async function triggerScrape(body: {
   })
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
   return res.json()
+}
+
+export interface SourceInfo {
+  name: string
+  kind: 'scraper' | 'api'
+  enabled: boolean
+  available: boolean
+  min_interval_minutes: number
+  last_run: {
+    at: string
+    status: string
+    jobs_found: number | null
+    jobs_new: number | null
+    error: string | null
+  } | null
+  running: boolean
+}
+
+export interface TimelinePoint {
+  date: string
+  discovered: number
+  removed: number
+  jobs_found: number
+  jobs_new: number
+  runs: number
+}
+
+export const fetchSources = (): Promise<SourceInfo[]> => get('/api/sources')
+
+export const fetchTimeline = (): Promise<TimelinePoint[]> => get('/api/stats/timeline')
+
+export async function createProfile(profile: Partial<SearchProfile>): Promise<SearchProfile> {
+  const res = await fetch('/api/config/profiles', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(profile),
+  })
+  if (!res.ok) throw new Error((await res.json()).detail ?? `${res.status}`)
+  return res.json()
+}
+
+export async function deleteProfile(name: string): Promise<void> {
+  const res = await fetch(`/api/config/profiles/${encodeURIComponent(name)}`, {
+    method: 'DELETE',
+  })
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
 }
 

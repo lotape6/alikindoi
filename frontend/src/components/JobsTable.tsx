@@ -1,3 +1,4 @@
+import { useCallback, useRef, useState } from 'react'
 import type { Job } from '../api'
 
 const STATUS_COLORS: Record<string, string> = {
@@ -10,6 +11,14 @@ const STATUS_COLORS: Record<string, string> = {
   withdrawn: 'bg-slate-800 text-slate-400',
 }
 
+interface Column {
+  key: string
+  label: string
+  sortable?: string
+  defaultWidth: number
+  render: (job: Job) => React.ReactNode
+}
+
 function salary(job: Job): string {
   if (!job.salary_annual_min && !job.salary_annual_max) return '—'
   const lo = job.salary_annual_min ? `${Math.round(job.salary_annual_min / 1000)}k` : '?'
@@ -17,25 +26,109 @@ function salary(job: Job): string {
   return `${lo}–${hi} ${job.salary_currency ?? ''}`
 }
 
+const COLUMNS: Column[] = [
+  {
+    key: 'badges', label: '', defaultWidth: 40,
+    render: (j) => (
+      <>
+        {j.app_status === 'new' && j.is_active && <span title="New">🆕</span>}
+        {!j.is_active && <span title="Removed">⚠️</span>}
+      </>
+    ),
+  },
+  { key: 'title', label: 'Title', sortable: 'title', defaultWidth: 240, render: (j) => <span className="font-medium">{j.title}</span> },
+  { key: 'company', label: 'Company', sortable: 'company', defaultWidth: 140, render: (j) => j.company },
+  {
+    key: 'location', label: 'Location', sortable: 'city', defaultWidth: 130,
+    render: (j) => (
+      <>
+        {j.city ?? (j.remote_type === 'remote' ? 'Remote' : '—')}
+        {j.remote_type && j.remote_type !== 'onsite' && (
+          <span className="ml-1 text-xs text-slate-400">({j.remote_type})</span>
+        )}
+      </>
+    ),
+  },
+  { key: 'seniority', label: 'Seniority', sortable: 'seniority', defaultWidth: 90, render: (j) => j.seniority ?? '—' },
+  { key: 'salary', label: 'Salary/yr', sortable: 'salary_annual_max', defaultWidth: 110, render: (j) => salary(j) },
+  {
+    key: 'status', label: 'Status', defaultWidth: 100,
+    render: (j) => (
+      <span className={`px-2 py-0.5 rounded-full text-xs ${STATUS_COLORS[j.app_status] ?? ''}`}>
+        {j.app_status}
+      </span>
+    ),
+  },
+  { key: 'source', label: 'Source', sortable: 'source', defaultWidth: 90, render: (j) => <span className="text-slate-400">{j.source}</span> },
+  { key: 'posted', label: 'Posted', sortable: 'date_posted', defaultWidth: 100, render: (j) => <span className="text-slate-400">{j.date_posted ?? '—'}</span> },
+]
+
 export default function JobsTable({
   jobs,
   onSelect,
+  sortBy,
+  sortDir,
+  onSort,
 }: {
   jobs: Job[]
   onSelect: (id: number) => void
+  sortBy?: string
+  sortDir?: 'asc' | 'desc'
+  onSort: (column: string) => void
 }) {
+  const [widths, setWidths] = useState<Record<string, number>>(
+    Object.fromEntries(COLUMNS.map((c) => [c.key, c.defaultWidth])),
+  )
+  const dragRef = useRef<{ key: string; startX: number; startWidth: number } | null>(null)
+
+  const onMouseDown = useCallback(
+    (key: string) => (e: React.MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      dragRef.current = { key, startX: e.clientX, startWidth: widths[key] }
+      const onMove = (ev: MouseEvent) => {
+        const drag = dragRef.current
+        if (!drag) return
+        const newWidth = Math.max(50, drag.startWidth + ev.clientX - drag.startX)
+        setWidths((w) => ({ ...w, [drag.key]: newWidth }))
+      }
+      const onUp = () => {
+        dragRef.current = null
+        window.removeEventListener('mousemove', onMove)
+        window.removeEventListener('mouseup', onUp)
+      }
+      window.addEventListener('mousemove', onMove)
+      window.addEventListener('mouseup', onUp)
+    },
+    [widths],
+  )
+
   return (
     <div className="overflow-x-auto rounded-lg border border-slate-800">
-      <table className="w-full text-sm">
+      <table className="text-sm table-fixed" style={{ width: Object.values(widths).reduce((a, b) => a + b, 0) }}>
         <thead className="bg-slate-900 text-slate-400 text-left">
           <tr>
-            {['', 'Title', 'Company', 'Location', 'Seniority', 'Salary/yr', 'Status', 'Source', 'Posted'].map(
-              (h) => (
-                <th key={h} className="px-3 py-2 font-medium">
-                  {h}
-                </th>
-              ),
-            )}
+            {COLUMNS.map((col) => (
+              <th
+                key={col.key}
+                style={{ width: widths[col.key] }}
+                className="px-3 py-2 font-medium relative select-none"
+              >
+                <span
+                  className={col.sortable ? 'cursor-pointer hover:text-slate-200' : ''}
+                  onClick={() => col.sortable && onSort(col.sortable)}
+                >
+                  {col.label}
+                  {col.sortable && sortBy === col.sortable && (
+                    <span className="ml-1">{sortDir === 'asc' ? '▲' : '▼'}</span>
+                  )}
+                </span>
+                <span
+                  onMouseDown={onMouseDown(col.key)}
+                  className="absolute right-0 top-0 h-full w-1.5 cursor-col-resize hover:bg-indigo-500"
+                />
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -47,31 +140,11 @@ export default function JobsTable({
                 job.is_active ? '' : 'opacity-50'
               }`}
             >
-              <td className="px-3 py-2 whitespace-nowrap">
-                {job.app_status === 'new' && job.is_active && <span title="New">🆕</span>}
-                {!job.is_active && <span title="Removed">⚠️</span>}
-              </td>
-              <td className="px-3 py-2 font-medium max-w-xs truncate">{job.title}</td>
-              <td className="px-3 py-2 max-w-[10rem] truncate">{job.company}</td>
-              <td className="px-3 py-2 whitespace-nowrap">
-                {job.city ?? (job.remote_type === 'remote' ? 'Remote' : '—')}
-                {job.remote_type && job.remote_type !== 'onsite' && (
-                  <span className="ml-1 text-xs text-slate-400">({job.remote_type})</span>
-                )}
-              </td>
-              <td className="px-3 py-2">{job.seniority ?? '—'}</td>
-              <td className="px-3 py-2 whitespace-nowrap">{salary(job)}</td>
-              <td className="px-3 py-2">
-                <span
-                  className={`px-2 py-0.5 rounded-full text-xs ${STATUS_COLORS[job.app_status] ?? ''}`}
-                >
-                  {job.app_status}
-                </span>
-              </td>
-              <td className="px-3 py-2 text-slate-400">{job.source}</td>
-              <td className="px-3 py-2 text-slate-400 whitespace-nowrap">
-                {job.date_posted ?? '—'}
-              </td>
+              {COLUMNS.map((col) => (
+                <td key={col.key} className="px-3 py-2 truncate" style={{ width: widths[col.key] }}>
+                  {col.render(job)}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>

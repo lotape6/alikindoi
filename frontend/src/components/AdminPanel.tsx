@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
+  deleteProfile,
   fetchConfig,
   fetchRuns,
   fetchScrapeStatus,
@@ -7,6 +9,9 @@ import {
   triggerScrape,
   type SearchProfile,
 } from '../api'
+import SourcesPanel from './SourcesPanel'
+import TimelineChart from './TimelineChart'
+import ProfileEditor from './ProfileEditor'
 
 const RUN_STATUS: Record<string, string> = {
   ok: 'text-emerald-400',
@@ -14,13 +19,23 @@ const RUN_STATUS: Record<string, string> = {
   skipped_rate_limit: 'text-sky-400',
 }
 
-function ProfileRow({ profile }: { profile: SearchProfile }) {
+function ProfileRow({
+  profile,
+  onEdit,
+}: {
+  profile: SearchProfile
+  onEdit: () => void
+}) {
   const queryClient = useQueryClient()
-  const mutation = useMutation({
-    mutationFn: (patch: Partial<SearchProfile>) => patchProfile(profile.name, patch),
+  const toggle = useMutation({
+    mutationFn: () => patchProfile(profile.name, { enabled: !profile.enabled }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['config'] }),
   })
-  const scrapeMutation = useMutation({
+  const remove = useMutation({
+    mutationFn: () => deleteProfile(profile.name),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['config'] }),
+  })
+  const scrape = useMutation({
     mutationFn: () => triggerScrape({ profile: profile.name }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['scrape-status'] })
@@ -29,43 +44,56 @@ function ProfileRow({ profile }: { profile: SearchProfile }) {
   })
 
   return (
-    <tr className="border-t border-slate-800">
+    <tr className={`border-t border-slate-800 ${profile.enabled ? '' : 'opacity-50'}`}>
       <td className="px-3 py-2">
         <input
           type="checkbox"
           checked={profile.enabled}
-          disabled={mutation.isPending}
-          onChange={(e) => mutation.mutate({ enabled: e.target.checked })}
+          disabled={toggle.isPending}
+          onChange={() => toggle.mutate()}
         />
       </td>
       <td className="px-3 py-2 font-medium">{profile.name}</td>
-      <td className="px-3 py-2 text-slate-400 max-w-[14rem] truncate">
+      <td className="px-3 py-2 text-slate-400 max-w-[14rem] truncate" title={profile.search_term}>
         {profile.search_term}
         {profile.location ? ` · ${profile.location}` : ''}
-        {profile.is_remote ? ' · remote' : ''}
+        {profile.is_remote === true ? ' · remote' : profile.is_remote === false ? ' · on-site' : ''}
       </td>
       <td className="px-3 py-2">
-        <input
-          type="number"
-          className="bg-slate-900 border border-slate-700 rounded px-2 py-1 w-24 text-sm"
-          defaultValue={profile.interval_minutes}
-          min={15}
-          onBlur={(e) => {
-            const v = Number(e.target.value)
-            if (v && v !== profile.interval_minutes)
-              mutation.mutate({ interval_minutes: v })
-          }}
-        />
+        <div className="flex flex-wrap gap-1 max-w-[12rem]">
+          {profile.tags.map((t) => (
+            <span key={t} className="px-1.5 py-0.5 rounded bg-slate-800 text-xs">
+              {t}
+            </span>
+          ))}
+        </div>
       </td>
+      <td className="px-3 py-2 text-slate-400">{profile.interval_minutes} min</td>
       <td className="px-3 py-2 text-slate-400">{profile.results_wanted}</td>
-      <td className="px-3 py-2 text-slate-400">{profile.hours_old ?? '—'}</td>
-      <td className="px-3 py-2">
+      <td className="px-3 py-2 text-slate-400">{profile.hours_old ?? '—'}h</td>
+      <td className="px-3 py-2 whitespace-nowrap">
         <button
-          className="px-3 py-1 rounded bg-indigo-700 hover:bg-indigo-600 text-sm disabled:opacity-40"
-          disabled={scrapeMutation.isPending}
-          onClick={() => scrapeMutation.mutate()}
+          className="px-2 py-1 rounded bg-indigo-700 hover:bg-indigo-600 text-xs disabled:opacity-40"
+          disabled={scrape.isPending}
+          onClick={() => scrape.mutate()}
         >
-          ▶ Run now
+          ▶ Run
+        </button>{' '}
+        <button
+          className="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600 text-xs"
+          onClick={onEdit}
+        >
+          ✏️ Edit
+        </button>{' '}
+        <button
+          className="px-2 py-1 rounded bg-red-900 hover:bg-red-800 text-xs disabled:opacity-40"
+          disabled={remove.isPending}
+          onClick={() => {
+            if (confirm(`Delete profile "${profile.name}"? (tracked jobs are kept)`))
+              remove.mutate()
+          }}
+        >
+          🗑
         </button>
       </td>
     </tr>
@@ -74,6 +102,8 @@ function ProfileRow({ profile }: { profile: SearchProfile }) {
 
 export default function AdminPanel() {
   const queryClient = useQueryClient()
+  const [editing, setEditing] = useState<SearchProfile | null>(null)
+  const [creating, setCreating] = useState(false)
   const { data: config } = useQuery({ queryKey: ['config'], queryFn: fetchConfig })
   const { data: runs } = useQuery({
     queryKey: ['runs'],
@@ -92,15 +122,22 @@ export default function AdminPanel() {
 
   return (
     <div className="space-y-6">
+      <SourcesPanel />
+      <TimelineChart />
+
       <section>
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-lg font-semibold">Search profiles</h2>
           <div className="flex items-center gap-3">
             {scrapeStatus?.running && (
-              <span className="text-sm text-amber-400 animate-pulse">
-                ⏳ Scrape running…
-              </span>
+              <span className="text-sm text-amber-400 animate-pulse">⏳ Scrape running…</span>
             )}
+            <button
+              className="px-3 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-sm"
+              onClick={() => setCreating(true)}
+            >
+              ➕ New profile
+            </button>
             <button
               className="px-3 py-1.5 rounded bg-emerald-700 hover:bg-emerald-600 text-sm disabled:opacity-40"
               disabled={scrapeAll.isPending || scrapeStatus?.running}
@@ -114,7 +151,7 @@ export default function AdminPanel() {
           <table className="w-full text-sm">
             <thead className="bg-slate-900 text-slate-400 text-left">
               <tr>
-                {['On', 'Profile', 'Query', 'Every (min)', 'Results', 'Fresh (h)', ''].map((h) => (
+                {['On', 'Profile', 'Query', 'Tags', 'Every', 'Results', 'Fresh', ''].map((h) => (
                   <th key={h} className="px-3 py-2 font-medium">
                     {h}
                   </th>
@@ -122,13 +159,15 @@ export default function AdminPanel() {
               </tr>
             </thead>
             <tbody>
-              {config?.search_profiles.map((p) => <ProfileRow key={p.name} profile={p} />)}
+              {config?.search_profiles.map((p) => (
+                <ProfileRow key={p.name} profile={p} onEdit={() => setEditing(p)} />
+              ))}
             </tbody>
           </table>
         </div>
         <p className="text-xs text-slate-500 mt-1">
-          Per-source minimum intervals are enforced server-side regardless of this
-          setting (anti-ban). Add/remove profiles by editing config.yaml.
+          Per-source minimum intervals are enforced server-side regardless of these
+          settings (anti-ban). Deleting a profile keeps its already-tracked jobs.
         </p>
       </section>
 
@@ -160,7 +199,7 @@ export default function AdminPanel() {
                   <td className="px-3 py-2">{r.jobs_found ?? '—'}</td>
                   <td className="px-3 py-2">{r.jobs_new ?? '—'}</td>
                   <td className="px-3 py-2">{r.jobs_removed ?? '—'}</td>
-                  <td className="px-3 py-2 text-red-400 max-w-[16rem] truncate">
+                  <td className="px-3 py-2 text-red-400 max-w-[16rem] truncate" title={r.error ?? ''}>
                     {r.error ?? ''}
                   </td>
                 </tr>
@@ -172,6 +211,9 @@ export default function AdminPanel() {
           )}
         </div>
       </section>
+
+      {editing && <ProfileEditor profile={editing} onClose={() => setEditing(null)} />}
+      {creating && <ProfileEditor profile={null} onClose={() => setCreating(false)} />}
     </div>
   )
 }
