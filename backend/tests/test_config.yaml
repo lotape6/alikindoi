@@ -1,0 +1,34 @@
+app:
+  database_url: "sqlite:///data/test.db"
+  missing_runs_threshold: 2
+  inactive_grace_days: 30
+
+rate_limits:
+  min_interval_minutes:
+    indeed: 30
+  jitter_seconds_min: 1
+  jitter_seconds_max: 2
+  max_results_per_source: 100
+
+sources:
+  jobspy:
+    indeed: { enabled: true }
+    google: { enabled: false }
+  apis:
+    adzuna: { enabled: false }
+    remotive: { enabled: false }
+
+search_profiles:
+  - name: "test-profile"
+    enabled: true
+    search_term: "python developer"
+    location: "Málaga, Spain"
+    country_indeed: "Spain"
+    is_remote: false
+    tags: ["python", "malaga"]
+    results_wanted: 25
+    hours_old: 72
+    interval_minutes: 360
+
+notifications:
+  on_new_job: true

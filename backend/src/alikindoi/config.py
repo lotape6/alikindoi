@@ -1,0 +1,127 @@
+"""Configuration loading: YAML config + .env secrets.
+
+Safe bounds for rate limits are ENFORCED here: any per-source interval
+below the hard floor raises a validation error at load time.
+"""
+
+from __future__ import annotations
+
+import os
+from functools import lru_cache
+from pathlib import Path
+
+import yaml
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field, field_validator, model_validator
+
+# Hard floors (minutes). Never lower these — they exist to avoid bans.
+HARD_MIN_INTERVALS: dict[str, int] = {
+    "indeed": 30,
+    "google": 30,
+    "linkedin": 720,
+    "glassdoor": 120,
+    "zip_recruiter": 120,
+    "adzuna": 15,
+    "remotive": 15,
+    "themuse": 15,
+}
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+DEFAULT_CONFIG_PATH = REPO_ROOT / "backend" / "config" / "config.yaml"
+
+
+class AppConfig(BaseModel):
+    database_url: str = "sqlite:///data/alikindoi.db"
+    missing_runs_threshold: int = 2
+    inactive_grace_days: int = 30
+
+
+class RateLimits(BaseModel):
+    min_interval_minutes: dict[str, int] = Field(default_factory=dict)
+    jitter_seconds_min: int = 2
+    jitter_seconds_max: int = 8
+    max_results_per_source: int = 100
+    backoff_base_seconds: int = 60
+
+    @model_validator(mode="after")
+    def enforce_hard_floors(self) -> "RateLimits":
+        for source, floor in HARD_MIN_INTERVALS.items():
+            configured = self.min_interval_minutes.get(source, floor)
+            if configured < floor:
+                raise ValueError(
+                    f"min_interval_minutes.{source}={configured} is below the "
+                    f"hard safety floor of {floor} min (anti-ban protection)"
+                )
+            self.min_interval_minutes[source] = configured
+        if self.jitter_seconds_min > self.jitter_seconds_max:
+            raise ValueError("jitter_seconds_min must be <= jitter_seconds_max")
+        return self
+
+
+class SearchProfile(BaseModel):
+    name: str
+    enabled: bool = True
+    search_term: str
+    google_search_term: str | None = None
+    location: str | None = None
+    country_indeed: str = "Spain"
+    adzuna_country: str = "es"
+    is_remote: bool | None = None
+    job_type: str | None = None
+    tags: list[str] = Field(default_factory=list)
+    results_wanted: int = 25
+    hours_old: int | None = None
+    interval_minutes: int = 360
+
+    @field_validator("results_wanted")
+    @classmethod
+    def cap_results(cls, v: int) -> int:
+        if v > 100:
+            raise ValueError("results_wanted capped at 100 (anti-ban ceiling)")
+        return v
+
+
+class NotificationsConfig(BaseModel):
+    on_new_job: bool = True
+    on_removed_job: bool = True
+    on_salary_change: bool = False
+    digest: str = "immediate"
+
+
+class Config(BaseModel):
+    app: AppConfig = Field(default_factory=AppConfig)
+    rate_limits: RateLimits = Field(default_factory=RateLimits)
+    sources: dict[str, dict[str, dict[str, bool]]] = Field(default_factory=dict)
+    search_profiles: list[SearchProfile] = Field(default_factory=list)
+    notifications: NotificationsConfig = Field(default_factory=NotificationsConfig)
+
+    def source_enabled(self, source: str) -> bool:
+        for group in self.sources.values():
+            if source in group:
+                return bool(group[source].get("enabled", False))
+        return False
+
+
+def load_config(path: Path | str | None = None) -> Config:
+    load_dotenv(REPO_ROOT / ".env")
+    cfg_path = Path(path) if path else Path(
+        os.environ.get("ALIKINDOI_CONFIG", DEFAULT_CONFIG_PATH)
+    )
+    with cfg_path.open() as f:
+        raw = yaml.safe_load(f) or {}
+    config = Config.model_validate(raw)
+    # Environment overrides (used by Docker: ALIKINDOI_DATABASE_URL)
+    if db_url := os.environ.get("ALIKINDOI_DATABASE_URL"):
+        config.app.database_url = db_url
+    return config
+
+
+@lru_cache
+def get_config() -> Config:
+    return load_config()
+
+
+def env_secret(name: str) -> str | None:
+    load_dotenv(REPO_ROOT / ".env")
+    value = os.environ.get(name, "").strip()
+    return value or None

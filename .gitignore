@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# App data
+*.db
+*.db-wal
+*.db-shm
+data/
+
+# Secrets
+.env
+
+# Node / frontend
+node_modules/
+dist/
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+.opencode/
