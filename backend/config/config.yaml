@@ -1,109 +1,114 @@
-# Alikindoi configuration
-# Secrets (API keys, proxies, notification creds) go in .env — never here.
-
 app:
-  # SQLite DB location (relative to repo root)
-  database_url: "sqlite:///data/alikindoi.db"
-  # Consecutive scrape runs a job can be missing before we probe its URL
+  database_url: sqlite:///data/alikindoi.db
   missing_runs_threshold: 2
-  # Days after which an inactive job is hidden from default listings
   inactive_grace_days: 30
-
-# Anti-ban settings. MINIMUMS ARE ENFORCED: values below the floor are
-# rejected at load time so the config can't accidentally nuke rate limits.
-# All periods are fractions of a day: shortest allowed is 4 runs/day (6h).
 rate_limits:
-  # Minimum minutes between runs per source (hard floors, do not lower)
   min_interval_minutes:
-    indeed: 360        # 4x/day
+    indeed: 360
     google: 360
-    linkedin: 720      # 2x/day — LinkedIn is aggressive
+    linkedin: 720
     glassdoor: 360
     zip_recruiter: 360
     adzuna: 360
     remotive: 360
     themuse: 360
-  # Random extra delay between individual searches (seconds)
   jitter_seconds_min: 2
   jitter_seconds_max: 8
-  # Cap of results requested per source per search (hard ceiling)
   max_results_per_source: 100
-  # Backoff on HTTP 429/403 (seconds, doubles each retry, max 3 retries)
   backoff_base_seconds: 60
-
 sources:
-  jobspy:   # scrapers — no keys needed
-    indeed: { enabled: true }
-    google: { enabled: false }   # 429s even via free proxies (burned IPs); paid proxies needed
-    linkedin: { enabled: true }  # works via validated free proxies; 12h floor enforced
-    glassdoor: { enabled: false }  # Cloudflare-protected, unreliable
-    zip_recruiter: { enabled: false }  # US/Canada only
+  jobspy:
+    indeed:
+      enabled: true
+    google:
+      enabled: false
+    linkedin:
+      enabled: true
+    glassdoor:
+      enabled: false
+    zip_recruiter:
+      enabled: false
   apis:
-    adzuna: { enabled: true }    # keys in .env (verified)
-    remotive: { enabled: true }  # public API, no key
-    themuse: { enabled: true }   # key in .env (verified)
-
-# Search profiles: each is one scraping unit with its own cadence.
+    adzuna:
+      enabled: true
+    remotive:
+      enabled: true
+    themuse:
+      enabled: true
 search_profiles:
-  - name: "python-developer"
-    enabled: true
-    search_term: "python developer"
-    google_search_term: "python developer jobs remote Spain"
-    location: "Spain"
-    country_indeed: "Spain"
-    adzuna_country: "es"
-    is_remote: true
-    job_type: "fulltime"
-    tags: ["python", "software", "developer"]
-    results_wanted: 25
-    hours_old: 72            # only fresh postings -> fewer requests
-    runs_per_day: 4          # every 6h (max frequency)
-
-  - name: "cpp-developer"
-    enabled: true
-    search_term: '"c++" developer'
-    google_search_term: "c++ developer jobs remote Spain"
-    location: "Spain"
-    country_indeed: "Spain"
-    adzuna_country: "es"
-    is_remote: true
-    job_type: "fulltime"
-    tags: ["c++", "software", "developer"]
-    results_wanted: 25
-    hours_old: 72
-    runs_per_day: 4
-
-  - name: "c-developer"
-    enabled: true
-    search_term: '"embedded c" OR "c programmer" developer'
-    google_search_term: "C programmer embedded developer jobs remote Spain"
-    location: "Spain"
-    country_indeed: "Spain"
-    adzuna_country: "es"
-    is_remote: true
-    job_type: "fulltime"
-    tags: ["c", "embedded", "software", "developer"]
-    results_wanted: 25
-    hours_old: 72
-    runs_per_day: 4
-
-  - name: "malaga-cadiz-onsite-hybrid"
-    enabled: true
-    search_term: 'software engineer (python OR "c++" OR c)'
-    google_search_term: "software engineer python c++ jobs in Málaga or Cádiz Spain"
-    location: "Málaga, Spain"
-    country_indeed: "Spain"
-    adzuna_country: "es"
-    is_remote: false
-    job_type: null
-    tags: ["python", "c++", "c", "software", "malaga", "cadiz", "hybrid", "onsite"]
-    results_wanted: 25
-    hours_old: 168           # 1 week — on-site markets move slower
-    runs_per_day: 2          # every 12h
-
-# Notification rules (Phase 6). Delivery channels configured via .env.
+- name: python-developer
+  enabled: true
+  search_term: python developer
+  google_search_term: 'python developer remote '
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - python
+  - software
+  - developer
+  results_wanted: 25
+  hours_old: 72
+  runs_per_day: 4
+  interval_minutes: 360
+- name: cpp-developer
+  enabled: true
+  search_term: '"c++" developer'
+  google_search_term: c++ developer jobs remote Spain
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - c++
+  - software
+  - developer
+  results_wanted: 25
+  hours_old: 72
+  runs_per_day: 4
+- name: c-developer
+  enabled: true
+  search_term: '"embedded c" OR "c programmer" developer'
+  google_search_term: C programmer embedded developer jobs remote Spain
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - c
+  - embedded
+  - software
+  - developer
+  results_wanted: 25
+  hours_old: 72
+  runs_per_day: 4
+- name: malaga-cadiz-onsite-hybrid
+  enabled: true
+  search_term: software engineer (python OR "c++" OR c)
+  google_search_term: software engineer python c++ jobs in Málaga or Cádiz Spain
+  location: Málaga, Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: false
+  job_type: null
+  tags:
+  - python
+  - c++
+  - c
+  - software
+  - malaga
+  - cadiz
+  - hybrid
+  - onsite
+  results_wanted: 25
+  hours_old: 168
+  runs_per_day: 2
 notifications:
   on_new_job: true
   on_removed_job: true
   on_salary_change: false
-  digest: "immediate"        # immediate | daily
+  digest: immediate

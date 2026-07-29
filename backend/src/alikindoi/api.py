@@ -266,6 +266,7 @@ def update_job(job_id: int, patch: JobPatch, db: DbSession) -> JobDetail:
                 )
             )
     db.commit()
+    db.expire(job)  # force refresh of tags/events collections
     return get_job(job_id, db)
 
 
