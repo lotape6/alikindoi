@@ -36,10 +36,20 @@ _SALARY_CONTEXT = re.compile(
 )
 
 # A numeric amount: 1-3 digits then groups of 3 separated by . or ,, optional
-# decimals, optional k/K suffix. Also plain 4-6 digit numbers (e.g. 45000).
-_AMOUNT = r"(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d{1,2})?|\d{4,6}|\d{1,3}(?:\.\d)?[kK])"
+# decimals, optional k/K suffix, plain 4-6 digit numbers (e.g. 45000), or a
+# plain small number (hourly rates like 25).
+_AMOUNT = r"(\d{1,3}(?:[.,]\d{3})+(?:[.,]\d{1,2})?|\d{4,6}|\d{1,3}(?:\.\d)?[kK]|\d{1,3})"
 _CURRENCY_SYM = r"(€|\$|£|EUR|USD|GBP|euros)?"
-_DASH = r"(?:\\?[-–—]|\ba\b|\bto\b)"  # markdown-escaped dash, ES "a", EN "to"
+_DASH = r"(?:\\?[-–—]|\ba\b|\bto\b|\by\b)"  # escaped dash, ES "a"/"y", EN "to"
+
+# Plausibility ranges per interval (applied to the parsed amounts).
+_PLAUSIBLE = {
+    "yearly": (1_000, 1_000_000),
+    "monthly": (100, 100_000),
+    "weekly": (100, 20_000),
+    "daily": (20, 3_000),
+    "hourly": (5, 500),
+}
 
 
 @dataclass
@@ -86,13 +96,25 @@ def _interval_near(text: str, end_pos: int) -> str:
     return "yearly"  # job-board salaries default to yearly
 
 
-def parse_salary_from_text(text: str | None) -> ParsedSalary | None:
-    """Best-effort salary extraction. Returns None if nothing plausible found."""
+def parse_salary_from_text(
+    text: str | None, *, require_context: bool = True
+) -> ParsedSalary | None:
+    """Best-effort salary extraction. Returns None if nothing plausible found.
+
+    require_context=True only trusts amounts near salary-related words; pass
+    False for strings already known to be salary data (e.g. Remotive's
+    salary field).
+    """
     if not text:
         return None
     text = text.replace("\\-", "-")  # markdown-escaped dashes from JobSpy
 
-    # Only trust amounts near salary context words, else we parse random numbers
+    def has_context(start: int, end: int) -> bool:
+        if not require_context:
+            return True
+        window = text[max(0, start - 120) : end + 120]
+        return bool(_SALARY_CONTEXT.search(window))
+
     best: ParsedSalary | None = None
     range_re = re.compile(
         _CURRENCY_SYM + r"\s*" + _AMOUNT + r"\s*" + _CURRENCY_SYM + r"\s*"
@@ -102,12 +124,11 @@ def parse_salary_from_text(text: str | None) -> ParsedSalary | None:
     single_re = re.compile(_CURRENCY_SYM + r"\s*" + _AMOUNT + r"\s*" + _CURRENCY_SYM, re.I)
 
     for m in range_re.finditer(text):
-        ctx_start = max(0, m.start() - 120)
-        if not _SALARY_CONTEXT.search(text[ctx_start : m.end() + 120]):
+        if not has_context(m.start(), m.end()):
             continue
         lo = _to_number(m.group(2))
         hi = _to_number(m.group(5))
-        if lo is None or hi is None or lo > hi or hi < 100:
+        if lo is None or hi is None or lo > hi:
             continue
         currency = (
             _currency_of(m.group(1)) or _currency_of(m.group(3))
@@ -118,12 +139,11 @@ def parse_salary_from_text(text: str | None) -> ParsedSalary | None:
 
     if best is None:
         for m in single_re.finditer(text):
-            ctx_start = max(0, m.start() - 120)
-            ctx = text[ctx_start : m.end() + 120]
-            if not _SALARY_CONTEXT.search(ctx):
+            if not has_context(m.start(), m.end()):
                 continue
+            ctx = text[max(0, m.start() - 120) : m.end() + 120]
             value = _to_number(m.group(2))
-            if value is None or value < 100:
+            if value is None:
                 continue
             currency = _currency_of(m.group(1)) or _currency_of(m.group(3))
             lo, hi = (None, value) if re.search(r"up\s+to|hasta", ctx, re.I) else (value, None)
@@ -131,10 +151,11 @@ def parse_salary_from_text(text: str | None) -> ParsedSalary | None:
 
     if best is None:
         return None
-    # Annualize sanity: reject implausible yearly values (< 1k or > 1M)
-    if best.interval == "yearly":
-        probe = best.max or best.min
-        if probe is not None and not (1_000 <= probe <= 1_000_000):
+    # Sanity: reject implausible values for the detected interval
+    probe = best.max or best.min
+    if probe is not None:
+        lo_plaus, hi_plaus = _PLAUSIBLE[best.interval]
+        if not (lo_plaus <= probe <= hi_plaus):
             return None
     return best
 

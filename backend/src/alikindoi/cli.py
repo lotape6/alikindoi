@@ -82,6 +82,47 @@ def serve(host: str = "127.0.0.1", port: int = 8000) -> None:
     uvicorn.run("alikindoi.api:app", host=host, port=port)
 
 
+@app.command()
+def backfill() -> None:
+    """Re-enrich existing jobs: parse missing salaries from descriptions and
+    normalize description formatting. Writes an 'enriched' event per change."""
+    from sqlalchemy import select
+
+    from alikindoi.db.models import JobEvent
+    from alikindoi.enrichment import annualize
+    from alikindoi.salary_parser import parse_salary_from_text
+    from alikindoi.textnorm import normalize_description
+
+    init_db()
+    session = get_session()
+    salary_fixed = desc_fixed = 0
+    for job in session.scalars(select(Job)).all():
+        changed: dict = {}
+        if job.salary_min is None and job.salary_max is None and job.description:
+            parsed = parse_salary_from_text(job.description)
+            if parsed is not None:
+                job.salary_min, job.salary_max = parsed.min, parsed.max
+                job.salary_currency = parsed.currency
+                job.salary_interval = parsed.interval
+                job.salary_annual_min = annualize(parsed.min, parsed.interval)
+                job.salary_annual_max = annualize(parsed.max, parsed.interval)
+                changed["salary"] = [parsed.min, parsed.max, parsed.currency, parsed.interval]
+                salary_fixed += 1
+        if job.description:
+            normalized = normalize_description(job.description)
+            if normalized != job.description:
+                job.description = normalized
+                changed["description"] = "normalized"
+                desc_fixed += 1
+        if changed:
+            job.events.append(JobEvent(event_type="enriched", payload=changed))
+    session.commit()
+    console.print(
+        f"[green]Backfill done:[/green] {salary_fixed} salaries parsed, "
+        f"{desc_fixed} descriptions normalized"
+    )
+
+
 @app.command("list")
 def list_jobs(
     new_only: bool = typer.Option(False, "--new", help="Only unseen (status=new) jobs"),

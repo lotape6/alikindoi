@@ -18,7 +18,9 @@ from sqlalchemy.orm import Session
 from alikindoi.config import get_config
 from alikindoi.db.models import Job, JobEvent, JobTag
 from alikindoi.enrichment import annualize, extract_tags, parse_seniority
+from alikindoi.salary_parser import parse_salary_from_text
 from alikindoi.schemas import JobPost
+from alikindoi.textnorm import normalize_description
 
 logger = logging.getLogger(__name__)
 
@@ -45,10 +47,31 @@ def _event(job: Job, event_type: str, payload: dict | None = None) -> None:
     job.events.append(JobEvent(event_type=event_type, payload=payload or {}))
 
 
+def enrich_post(post: JobPost) -> JobPost:
+    """Normalize description and fill salary from text when the source
+    did not provide structured salary data. Idempotent — applied before
+    hashing so content hashes stay stable across runs."""
+    post.description = normalize_description(post.description)
+    if post.salary_min is None and post.salary_max is None:
+        parsed = parse_salary_from_text(post.description)
+        if parsed is None and post.extra.get("salary_text"):
+            parsed = parse_salary_from_text(
+                str(post.extra["salary_text"]), require_context=False
+            )
+        if parsed is not None:
+            post.salary_min = parsed.min
+            post.salary_max = parsed.max
+            post.salary_currency = parsed.currency
+            post.salary_interval = parsed.interval
+            post.extra["salary_source"] = "description"
+    return post
+
+
 def upsert_post(session: Session, post: JobPost, stats: SyncStats) -> Job:
     """Insert or update one posting. Returns the Job row."""
     from datetime import UTC, datetime
 
+    post = enrich_post(post)
     now = datetime.now(UTC)
     stmt = select(Job).where(Job.source == post.source, Job.external_id == post.external_id)
     job = session.scalar(stmt)
