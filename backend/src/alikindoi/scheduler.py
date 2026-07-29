@@ -24,10 +24,12 @@ logger = logging.getLogger(__name__)
 def run_tick() -> None:
     """One scheduler tick: run all enabled profiles (rate limits apply)."""
     from alikindoi.notifications import dispatch_pending_notifications
+    from alikindoi.runner import cleanup_stale_runs
 
     cfg = get_config()
     init_db()
     session = get_session()
+    cleanup_stale_runs(session)
     adapters = available_adapters()
     profiles = [p for p in cfg.search_profiles if p.enabled]
     if not adapters or not profiles:

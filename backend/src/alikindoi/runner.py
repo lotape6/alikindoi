@@ -85,6 +85,28 @@ def _record_run(session: Session, source: str, profile_name: str) -> None:
     session.commit()
 
 
+def cleanup_stale_runs(session: Session, stale_after_minutes: int = 30) -> int:
+    """Mark ScrapeRun rows left 'running' (finished_at NULL) by a crash or
+    kill as interrupted. Called on startup so the dashboard never shows a
+    phantom running scrape and history stays truthful."""
+    cutoff = datetime.now(UTC) - timedelta(minutes=stale_after_minutes)
+    stmt = select(ScrapeRun).where(ScrapeRun.finished_at.is_(None))
+    count = 0
+    for run in session.scalars(stmt):
+        started = run.started_at
+        if started.tzinfo is None:
+            started = started.replace(tzinfo=UTC)
+        if started < cutoff:
+            run.status = "interrupted"
+            run.error = "process restarted while running"
+            run.finished_at = datetime.now(UTC)
+            count += 1
+    if count:
+        session.commit()
+        logger.info("Marked %d stale scrape run(s) as interrupted", count)
+    return count
+
+
 def run_profiles(
     session: Session,
     profiles: list[SearchProfile],

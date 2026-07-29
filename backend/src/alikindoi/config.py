@@ -81,6 +81,16 @@ class SearchProfile(BaseModel):
     hours_old: int | None = None
     runs_per_day: int = 2  # 1 = daily, 2 = every 12h, 4 = every 6h (max)
 
+    @field_validator("country_indeed", mode="before")
+    @classmethod
+    def default_country_indeed(cls, v: str | None) -> str:
+        return v.strip() if v and v.strip() else "Spain"
+
+    @field_validator("adzuna_country", mode="before")
+    @classmethod
+    def default_adzuna_country(cls, v: str | None) -> str:
+        return v.strip() if v and v.strip() else "es"
+
     @field_validator("runs_per_day")
     @classmethod
     def valid_runs_per_day(cls, v: int) -> int:
@@ -159,10 +169,20 @@ PROFILE_EDITABLE_FIELDS = {
 }
 
 
+def _clean_empty(data: dict) -> dict:
+    """Treat blank strings as unset (form submits '' for empty fields)."""
+    return {
+        k: (None if isinstance(v, str) and not v.strip() else v)
+        for k, v in data.items()
+    }
+
+
 def update_profile_in_yaml(name: str, updates: dict) -> Config:
     """Persist allowed profile fields back to config.yaml, then reload."""
     updates = {
-        k: v for k, v in updates.items() if k in PROFILE_EDITABLE_FIELDS and v is not None
+        k: v
+        for k, v in _clean_empty(updates).items()
+        if k in PROFILE_EDITABLE_FIELDS and v is not None
     }
     if not updates:
         raise ValueError("No updatable fields provided")
@@ -183,6 +203,7 @@ def update_profile_in_yaml(name: str, updates: dict) -> Config:
 
 def create_profile_in_yaml(data: dict) -> Config:
     """Add a new search profile to config.yaml (validated before writing)."""
+    data = _clean_empty(data)
     raw = _load_yaml()
     profiles = raw.setdefault("search_profiles", [])
     name = data.get("name")

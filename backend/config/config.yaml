@@ -107,6 +107,19 @@ search_profiles:
   results_wanted: 25
   hours_old: 168
   runs_per_day: 2
+- name: runner
+  enabled: true
+  search_term: c++
+  google_search_term: null
+  location: Málaga
+  country_indeed: Spain
+  adzuna_country: es
+  tags:
+  - c++
+  - málaga
+  results_wanted: 25
+  hours_old: 72
+  runs_per_day: 2
 notifications:
   on_new_job: true
   on_removed_job: true

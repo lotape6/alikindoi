@@ -42,6 +42,46 @@ uv venv && uv pip install -e ".[dev]"
 cd ../frontend && npm install && npm run dev   # dashboard at :5173
 ```
 
+## Restart robustness
+
+- Every (profile, source) execution is persisted in `source_runs` with a
+  timestamp; after a restart (container, process, or machine), sources whose
+  configured period hasn't elapsed are **not** re-scraped.
+- Scrape runs interrupted by a crash/kill are marked `interrupted` on startup
+  (never shown as forever "running").
+- Docker services use `restart: unless-stopped` — the stack comes back after
+  a reboot or Docker daemon restart.
+- SQLite runs in WAL mode (crash-safe); tables are auto-created on startup.
+
+## Backup, export & moving to a new machine
+
+All state lives in two places: `data/alikindoi.db` (SQLite) and
+`backend/config/config.yaml` (+ `.env` for secrets).
+
+**Backup (safe while running):**
+```bash
+sqlite3 data/alikindoi.db ".backup data/backup-$(date +%F).db"
+```
+
+**Export for migration (cleanest — DB is quiescent):**
+```bash
+docker compose down
+cp data/alikindoi.db data/alikindoi.db-wal data/alikindoi.db-shm /path/to/usb/   # -wal/-shm may not exist; that's fine
+cp backend/config/config.yaml .env /path/to/usb/
+```
+
+**Import on a new PC:**
+```bash
+git clone git@github.com:lotape6/alikindoi.git && cd alikindoi
+mkdir -p data
+cp /path/to/usb/alikindoi.db data/
+cp /path/to/usb/config.yaml backend/config/
+cp /path/to/usb/.env .                      # recreate from .env.example if missing
+docker compose up -d --build
+```
+Your entire job history, application pipeline, notes and rate-limit state
+are preserved — the scheduler will simply resume on schedule.
+
 ## Configuration
 
 `backend/config/config.yaml` — search profiles (terms, location, remote

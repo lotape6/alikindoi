@@ -16,6 +16,19 @@ from alikindoi.db.session import get_session, init_db
 
 app = FastAPI(title="Alikindoi", version="0.1.0")
 
+
+@app.on_event("startup")
+def _startup_cleanup() -> None:
+    """Restart robustness: close scrape runs orphaned by a previous crash."""
+    from alikindoi.runner import cleanup_stale_runs
+
+    init_db()
+    session = get_session()
+    try:
+        cleanup_stale_runs(session)
+    finally:
+        session.close()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://localhost:3000", "http://frontend"],

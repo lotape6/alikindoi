@@ -57,6 +57,9 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
   429/403, configurable cadence with enforced safe minimums. Do not bypass.
 - Periodicity is expressed as `runs_per_day` (1/2/4); 4×/day (6h) is the
   hard floor for all sources, LinkedIn 2×/day (12h).
+- Restart robustness: executions persisted in `source_runs` (no re-scrape if
+  not due); stale runs marked `interrupted` on startup; Docker services
+  `restart: unless-stopped`; SQLite WAL.
 - API keys only via `.env` (never committed; `.env.example` documents them).
 - Phases: 1 scaffold ✅, 2 core engine (DB/adapters/sync/CLI) ✅,
   3 scheduler+rate limiting ✅, 4 REST API ✅, 5 dashboard ✅,

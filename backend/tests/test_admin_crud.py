@@ -33,6 +33,21 @@ class TestProfileCrud:
         profiles = client.get("/api/config").json()["search_profiles"]
         assert any(p["name"] == "rust-developer" for p in profiles)
 
+    def test_create_blank_strings_become_defaults(self, client):
+        """Form submissions send '' for untouched fields — must not persist."""
+        resp = client.post("/api/config/profiles", json={
+            "name": "blank-fields",
+            "search_term": "go developer",
+            "country_indeed": "",
+            "adzuna_country": "",
+            "google_search_term": "",
+        })
+        assert resp.status_code == 201
+        data = resp.json()
+        assert data["country_indeed"] == "Spain"
+        assert data["adzuna_country"] == "es"
+        assert data["google_search_term"] is None
+
     def test_create_duplicate_rejected(self, client):
         resp = client.post("/api/config/profiles", json={
             "name": "test-profile", "search_term": "python",
