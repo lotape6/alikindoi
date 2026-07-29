@@ -83,6 +83,23 @@ def serve(host: str = "127.0.0.1", port: int = 8000) -> None:
 
 
 @app.command()
+def proxies(
+    refresh: bool = typer.Option(False, "--refresh", "-r", help="Force revalidation"),
+) -> None:
+    """Show (and optionally refresh) the validated free proxy list."""
+    from alikindoi.proxies import get_proxies, refresh_proxies
+
+    with console.status("Validating proxies…"):
+        working = refresh_proxies() if refresh else get_proxies()
+    if working:
+        console.print(f"[green]{len(working)} working proxies:[/green]")
+        for p in working:
+            console.print(f"  {p}")
+    else:
+        console.print("[red]No working proxies found.[/red]")
+
+
+@app.command()
 def backfill() -> None:
     """Re-enrich existing jobs: parse missing salaries from descriptions and
     normalize description formatting. Writes an 'enriched' event per change."""

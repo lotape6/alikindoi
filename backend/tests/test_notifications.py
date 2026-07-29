@@ -50,6 +50,20 @@ class TestDispatch:
         n = notifications.dispatch_pending_notifications(session, [event.id])
         assert n == 0
 
+    def test_burst_protection_combines(self, session, make_post, monkeypatch):
+        """>5 messages in one dispatch are combined even in immediate mode."""
+        events = [_seed_event(session, make_post) for _ in range(6)]
+        event_ids = [
+            e.id for e in session.query(JobEvent).filter_by(event_type="discovered").all()
+        ]
+        sent = []
+        monkeypatch.setattr(notifications, "send_telegram", lambda m: sent.append(m) or True)
+        monkeypatch.setattr(notifications, "send_discord", lambda m: False)
+        monkeypatch.setattr(notifications, "send_email", lambda s, b: False)
+        n = notifications.dispatch_pending_notifications(session, event_ids)
+        assert n == 1
+        assert "6 updates" in sent[0]
+
     def test_daily_digest_combines(self, session, make_post, monkeypatch):
         _seed_event(session, make_post)
         _seed_event(session, make_post)

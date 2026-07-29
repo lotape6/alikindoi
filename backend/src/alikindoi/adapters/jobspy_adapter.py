@@ -6,12 +6,16 @@ import logging
 from datetime import date
 
 from alikindoi.adapters.base import AdapterError, BaseAdapter
-from alikindoi.config import SearchProfile, env_secret, get_config
+from alikindoi.config import SearchProfile, get_config
 from alikindoi.schemas import JobPost
 
 logger = logging.getLogger(__name__)
 
 JOBSPY_SITES = ("indeed", "google", "linkedin", "glassdoor", "zip_recruiter")
+
+# Sources that require proxies to work reliably (CAPTCHA/rate-limit heavy).
+# Proxies are used ONLY for these; API adapters never see them.
+PROXY_SITES = ("google", "linkedin", "glassdoor")
 
 _JOB_TYPE_MAP = {
     "fulltime": "fulltime",
@@ -56,9 +60,15 @@ class JobSpyAdapter(BaseAdapter):
             )
         if profile.job_type is None:
             kwargs.pop("job_type")
-        proxies = env_secret("SCRAPER_PROXIES")
-        if proxies:
-            kwargs["proxies"] = [p.strip() for p in proxies.split(",") if p.strip()]
+        if self.name in PROXY_SITES:
+            from alikindoi.proxies import get_proxies
+
+            proxies = get_proxies()
+            if not proxies:
+                raise AdapterError(
+                    f"JobSpy[{self.name}] requires proxies but none are working"
+                )
+            kwargs["proxies"] = proxies
 
         try:
             df = scrape_jobs(**{k: v for k, v in kwargs.items() if v is not None})

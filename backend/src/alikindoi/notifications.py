@@ -119,8 +119,8 @@ def dispatch_pending_notifications(session: Session, event_ids: list[int]) -> in
         return 0
 
     sent = 0
-    if cfg.digest == "daily":
-        # Digest mode: one combined message per channel
+    if cfg.digest == "daily" or len(messages) > 5:
+        # Digest mode (or burst protection): one combined message per channel
         combined = f"Alikindoi digest — {len(messages)} updates\n\n" + "\n\n".join(messages)
         sent += send_telegram(combined) + send_discord(combined)
         if send_email(f"Alikindoi: {len(messages)} job updates", combined):

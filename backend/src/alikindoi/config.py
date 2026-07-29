@@ -29,6 +29,10 @@ HARD_MIN_INTERVALS: dict[str, int] = {
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_CONFIG_PATH = REPO_ROOT / "backend" / "config" / "config.yaml"
 
+# Load .env exactly once at import (not per call) so tests can reliably
+# override/delete variables without them being re-added from disk.
+load_dotenv(REPO_ROOT / ".env")
+
 
 class AppConfig(BaseModel):
     database_url: str = "sqlite:///data/alikindoi.db"
@@ -103,7 +107,6 @@ class Config(BaseModel):
 
 
 def load_config(path: Path | str | None = None) -> Config:
-    load_dotenv(REPO_ROOT / ".env")
     cfg_path = Path(path) if path else Path(
         os.environ.get("ALIKINDOI_CONFIG", DEFAULT_CONFIG_PATH)
     )
@@ -196,6 +199,5 @@ def get_config() -> Config:
 
 
 def env_secret(name: str) -> str | None:
-    load_dotenv(REPO_ROOT / ".env")
     value = os.environ.get(name, "").strip()
     return value or None

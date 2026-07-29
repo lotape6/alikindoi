@@ -5,19 +5,16 @@ Check items off as you complete them. Keep secrets in `.env` (never commit).
 
 ## API keys (optional but recommended — better salaries & coverage)
 
-- [ ] **Adzuna** — register free at <https://developer.adzuna.com/signup>,
-      then set `ADZUNA_APP_ID` and `ADZUNA_APP_KEY` in `.env` and set
-      `sources.apis.adzuna.enabled: true` in `backend/config/config.yaml`.
-      Why: best structured salary data for Spain.
-- [ ] **The Muse** — request free key at
-      <https://www.themuse.com/developers/api/v2/apps>, set `THEMUSE_API_KEY`
-      in `.env` and enable `sources.apis.themuse`.
+- [x] **Adzuna** — ✅ configured and verified (2026-07-29): ~148 Python
+      jobs in ES, salary data flowing. Enabled in config.
+- [x] **The Muse** — ✅ configured and verified (2026-07-29). Note: mostly
+      US/remote coverage, few Spain listings (expected).
 
 ## Notifications (Phase 6 — pick any)
 
-- [ ] **Telegram** — create a bot via @BotFather, get the token; get your
-      chat id (e.g. via @userinfobot). Set `TELEGRAM_BOT_TOKEN` and
-      `TELEGRAM_CHAT_ID` in `.env`.
+- [x] **Telegram** — ✅ verified 2026-07-29 (@alikindoi_bot). Fixed the chat
+      id (the one initially in .env was wrong; correct one discovered via
+      getUpdates). Test message delivered.
 - [ ] **Discord** — create a webhook in your server (channel settings →
       Integrations → Webhooks) and set `DISCORD_WEBHOOK_URL` in `.env`.
 - [ ] **Email digest** — set `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD`,
@@ -25,13 +22,18 @@ Check items off as you complete them. Keep secrets in `.env` (never commit).
 
 ## Scraping sources
 
-- [ ] **Google Jobs is disabled by default**: Google serves CAPTCHAs to
-      datacenter/container IPs (observed as `/sorry/` failures in the run
-      history). Re-enable `sources.jobspy.google` only together with
-      `SCRAPER_PROXIES`, or accept intermittent failures.
-- [ ] **LinkedIn** (high value, high ban risk): only if you accept the risk —
-      get rotating proxies, set `SCRAPER_PROXIES` in `.env`, enable
-      `sources.jobspy.linkedin`. The scheduler already enforces ≥12h cadence.
+- [x] **Proxies** — ✅ auto-configured: `proxies.py` fetches & validates
+      free proxies (ProxyScrape/Geonode/TheSpeedX), caches 1h, used ONLY for
+      LinkedIn scraping (LinkedIn: 25 jobs ingested on first proxied run ✅).
+      Refresh manually with `python -m alikindoi proxies --refresh`.
+      Security note: free proxies are used ONLY for public job-board
+      scraping — API keys and notifications never route through them.
+- [ ] **Google Jobs — disabled**: returns 429 even through free proxies
+      (Google knows the free lists). Enable only with PAID residential
+      proxies in `SCRAPER_PROXIES`.
+- [ ] **LinkedIn quality check** — it works via free proxies, but watch the
+      run history for a few days; if failures rise, proxies need refreshing
+      more often or a paid list.
 
 ## Personalization
 

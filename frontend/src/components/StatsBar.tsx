@@ -2,7 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchStats } from '../api'
 
 export default function StatsBar({ onNewOnly }: { onNewOnly: () => void }) {
-  const { data } = useQuery({ queryKey: ['stats'], queryFn: fetchStats })
+  const { data } = useQuery({
+    queryKey: ['stats'],
+    queryFn: fetchStats,
+    refetchInterval: 60_000,
+  })
   if (!data) return null
 
   const cards = [

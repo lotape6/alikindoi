@@ -1,3 +1,4 @@
+from alikindoi.adapters.adzuna import _locality
 from alikindoi.adapters.jobspy_adapter import JobSpyAdapter, _parse_location
 from alikindoi.config import SearchProfile
 
@@ -11,6 +12,20 @@ class TestParseLocation:
 
     def test_none(self):
         assert _parse_location(None) == (None, None, None)
+
+
+class TestAdzunaLocality:
+    """`where` must never receive a country name (returns 0 results)."""
+
+    def test_country_only_returns_none(self):
+        assert _locality("Spain", "es") is None
+        assert _locality("España", "es") is None
+
+    def test_city_country_returns_city(self):
+        assert _locality("Málaga, Spain", "es") == "Málaga"
+
+    def test_none(self):
+        assert _locality(None, "es") is None
 
 
 class TestRowToPost:

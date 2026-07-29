@@ -24,6 +24,8 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
   - `textnorm.py` — description normalization (HTML→markdown, unescape)
   - `runner.py` — rate-limited run orchestration shared by CLI & scheduler;
     records every execution in `scrape_runs`
+  - `proxies.py` — free proxy fetching/validation/caching (JobSpy only,
+    never for credentialed APIs); CLI: `alikindoi proxies [--refresh]`
   - `scheduler.py` — APScheduler ticks (coalesced, persisted `source_runs`)
   - `api.py` — FastAPI REST API (`/api/jobs`, `/api/stats`, `/api/tags`,
     `/api/filters`, `/api/runs`, `/api/config`, `/api/scrape`)

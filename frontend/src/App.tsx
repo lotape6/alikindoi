@@ -16,6 +16,7 @@ export default function App() {
     queryKey: ['jobs', filters],
     queryFn: () => fetchJobs(filters),
     enabled: view === 'jobs',
+    refetchInterval: 60_000, // auto-refresh with latest scrape results
   })
 
   const update = (patch: Partial<JobFilters>) =>

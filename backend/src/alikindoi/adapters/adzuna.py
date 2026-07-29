@@ -37,12 +37,15 @@ class AdzunaAdapter(BaseAdapter):
             "results_per_page": min(profile.results_wanted, 50),
             "content-type": "application/json",
         }
-        if profile.location:
-            params["where"] = profile.location
+        # `where` only accepts locality names, NOT country names (verified:
+        # where=Spain returns 0 results). Strip the country part; omit for
+        # country-wide searches.
+        where = _locality(profile.location, profile.adzuna_country)
+        if where:
+            params["where"] = where
         if profile.hours_old:
             params["max_days_old"] = max(1, profile.hours_old // 24)
-        if profile.job_type == "fulltime":
-            params["full_time"] = "1"
+        # NOTE: no full_time=1 — the filter returns 0 results for ES queries.
 
         url = BASE_URL.format(country=profile.adzuna_country, page=1)
         try:
@@ -97,6 +100,26 @@ class AdzunaAdapter(BaseAdapter):
             profile_name=profile.name,
             extra={"category": (item.get("category") or {}).get("label")},
         )
+
+
+_COUNTRY_NAMES = {
+    "spain", "españa", "es", "uk", "united kingdom", "gb", "germany",
+    "deutschland", "de", "france", "fr", "netherlands", "nl", "usa",
+    "united states", "us", "italy", "it", "portugal", "pt",
+}
+
+
+def _locality(location: str | None, country_code: str) -> str | None:
+    """Extract the city/region part of a profile location for Adzuna's
+    `where` param; None for country-wide searches."""
+    if not location:
+        return None
+    parts = [p.strip() for p in location.split(",") if p.strip()]
+    non_country = [
+        p for p in parts
+        if p.lower() not in _COUNTRY_NAMES and p.lower() != country_code.lower()
+    ]
+    return non_country[0] if non_country else None
 
 
 def _currency_for(country: str) -> str | None:

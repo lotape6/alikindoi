@@ -14,8 +14,13 @@ def _test_env(tmp_path, monkeypatch):
     config_copy = tmp_path / "config.yaml"
     shutil.copy(TEST_DIR / "test_config.yaml", config_copy)
     monkeypatch.setenv("ALIKINDOI_CONFIG", str(config_copy))
-    monkeypatch.delenv("ADZUNA_APP_ID", raising=False)
-    monkeypatch.delenv("ADZUNA_APP_KEY", raising=False)
+    # Never use real credentials in tests, even if .env is populated
+    for var in (
+        "ADZUNA_APP_ID", "ADZUNA_APP_KEY", "THEMUSE_API_KEY",
+        "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID", "DISCORD_WEBHOOK_URL",
+        "SMTP_HOST", "NOTIFY_EMAIL_TO", "SCRAPER_PROXIES",
+    ):
+        monkeypatch.setenv(var, "")
 
     from alikindoi.config import get_config
 

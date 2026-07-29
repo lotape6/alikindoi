@@ -27,32 +27,44 @@ class TheMuseAdapter(BaseAdapter):
     def fetch(self, profile: SearchProfile) -> list[JobPost]:
         if not self.is_available():
             raise AdapterError("The Muse adapter not available (missing key or disabled)")
-        params: dict = {
-            "api_key": self.api_key,
-            "page": 1,
-            "descending": "true",
-        }
-        if profile.location:
-            params["location"] = profile.location
+
+        # The Muse has no text-search param: use engineering categories +
+        # location, then match the term client-side over a few pages
+        # (bounded to stay well under the free tier).
+        term = profile.search_term.lower().strip('"')
+        keywords = [w for w in term.replace("or", " ").split() if len(w) > 2]
+        posts: list[JobPost] = []
         try:
-            resp = httpx.get(API_URL, params=params, timeout=30)
-            if resp.status_code == 429:
-                raise AdapterError("The Muse rate limit hit (429)")
-            resp.raise_for_status()
-            data = resp.json()
+            for page in range(1, 4):
+                params: dict = {
+                    "api_key": self.api_key,
+                    "page": page,
+                    "category": "Software Engineering",
+                    "descending": "true",
+                }
+                if profile.location:
+                    params["location"] = profile.location
+                resp = httpx.get(API_URL, params=params, timeout=30)
+                if resp.status_code == 429:
+                    raise AdapterError("The Muse rate limit hit (429)")
+                resp.raise_for_status()
+                results = resp.json().get("results", [])
+                if not results:
+                    break
+                for item in results:
+                    title = (item.get("name") or "").lower()
+                    if keywords and not any(k in title for k in keywords):
+                        continue
+                    posts.append(self._item_to_post(item, profile))
+                    if len(posts) >= profile.results_wanted:
+                        break
+                if len(posts) >= profile.results_wanted:
+                    break
         except AdapterError:
             raise
         except Exception as exc:
             raise AdapterError(f"The Muse request failed: {exc}") from exc
 
-        term = profile.search_term.lower()
-        posts = []
-        for item in data.get("results", []):
-            if term and term not in (item.get("name") or "").lower():
-                continue  # The Muse has no text search param; filter client-side
-            posts.append(self._item_to_post(item, profile))
-            if len(posts) >= profile.results_wanted:
-                break
         logger.info("TheMuse: %d results for profile %s", len(posts), profile.name)
         return posts
 
