@@ -23,4 +23,7 @@ dist/
 .DS_Store
 .idea/
 .vscode/
-.opencode/
+
+# opencode: keep the harness (agents/commands/skills/config) in git,
+# ignore only session plans
+.opencode/plans/

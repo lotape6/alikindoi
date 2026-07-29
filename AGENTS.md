@@ -56,3 +56,15 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
 - Phases: 1 scaffold ✅, 2 core engine (DB/adapters/sync/CLI) ✅,
   3 scheduler+rate limiting ✅, 4 REST API ✅, 5 dashboard ✅,
   6 notifications ✅, 7 compose/docs ✅.
+
+## opencode harness (`.opencode/`, committed)
+- `opencode.json` — instructions (AGENTS.md, TODOs.md) + bash permissions
+  (destructive git/rm ask first).
+- `agents/reviewer.md` — read-only subagent enforcing the rules above
+  (anti-ban, audit trail, config safety, tests, docs). Invoke via Task tool
+  before non-trivial commits.
+- `commands/test.md` (`/test`) — pytest + frontend build, fix until green.
+- `commands/ship.md` (`/ship`) — verify → reviewer → commit → push.
+- `skills/scraping-safety/` — anti-ban + data-trust rules, auto-triggered
+  when editing adapters/, runner.py, scheduler.py or rate-limit config.
+- After changing anything under `.opencode/`, restart opencode to reload.
