@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 
 import pytest
@@ -8,8 +9,11 @@ TEST_DIR = Path(__file__).parent
 
 @pytest.fixture(autouse=True)
 def _test_env(tmp_path, monkeypatch):
-    """Isolate each test: temp SQLite DB + test config."""
-    monkeypatch.setenv("ALIKINDOI_CONFIG", str(TEST_DIR / "test_config.yaml"))
+    """Isolate each test: temp SQLite DB + a COPY of the test config (the
+    admin API can write config back to YAML; never dirty the source file)."""
+    config_copy = tmp_path / "config.yaml"
+    shutil.copy(TEST_DIR / "test_config.yaml", config_copy)
+    monkeypatch.setenv("ALIKINDOI_CONFIG", str(config_copy))
     monkeypatch.delenv("ADZUNA_APP_ID", raising=False)
     monkeypatch.delenv("ADZUNA_APP_KEY", raising=False)
 

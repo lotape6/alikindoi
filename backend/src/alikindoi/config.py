@@ -116,6 +116,43 @@ def load_config(path: Path | str | None = None) -> Config:
     return config
 
 
+def update_profile_in_yaml(name: str, updates: dict) -> Config:
+    """Persist allowed profile fields back to config.yaml, then reload.
+
+    Only these keys are writable via the API: enabled, interval_minutes,
+    results_wanted, hours_old, search_term, google_search_term, location,
+    is_remote, job_type, tags.
+    """
+    allowed = {
+        "enabled", "interval_minutes", "results_wanted", "hours_old",
+        "search_term", "google_search_term", "location", "is_remote",
+        "job_type", "tags",
+    }
+    updates = {k: v for k, v in updates.items() if k in allowed and v is not None}
+    if not updates:
+        raise ValueError("No updatable fields provided")
+
+    cfg_path = Path(os.environ.get("ALIKINDOI_CONFIG", DEFAULT_CONFIG_PATH))
+    with cfg_path.open() as f:
+        raw = yaml.safe_load(f) or {}
+
+    for profile in raw.get("search_profiles", []):
+        if profile.get("name") == name:
+            profile.update(updates)
+            break
+    else:
+        raise KeyError(f"Profile '{name}' not found")
+
+    # Validate BEFORE persisting: an invalid update must never hit disk
+    Config.model_validate(raw)
+
+    with cfg_path.open("w") as f:
+        yaml.safe_dump(raw, f, sort_keys=False, allow_unicode=True)
+
+    get_config.cache_clear()
+    return get_config()
+
+
 @lru_cache
 def get_config() -> Config:
     return load_config()

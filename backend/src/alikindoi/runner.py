@@ -23,7 +23,7 @@ from sqlalchemy.orm import Session
 
 from alikindoi.adapters.base import BaseAdapter
 from alikindoi.config import SearchProfile, get_config
-from alikindoi.db.models import JobEvent, SourceRun
+from alikindoi.db.models import JobEvent, ScrapeRun, SourceRun
 from alikindoi.sync import SyncStats, sync_posts
 
 logger = logging.getLogger(__name__)
@@ -92,6 +92,7 @@ def run_profiles(
     *,
     force: bool = False,
     sleep_jitter: bool = True,
+    trigger: str = "scheduler",
 ) -> RunReport:
     """Run every (profile, adapter) pair subject to rate limits."""
     from alikindoi.adapters.base import AdapterError
@@ -106,25 +107,50 @@ def run_profiles(
                 report.results.append(
                     RunResult(profile.name, adapter.name, "skipped_rate_limit")
                 )
+                session.add(
+                    ScrapeRun(
+                        trigger=trigger, profile_name=profile.name,
+                        source=adapter.name, status="skipped_rate_limit",
+                        finished_at=datetime.now(UTC),
+                    )
+                )
+                session.commit()
                 continue
+            run_row = ScrapeRun(
+                trigger=trigger, profile_name=profile.name, source=adapter.name,
+                status="ok",
+            )
+            session.add(run_row)
+            session.commit()
             try:
                 posts = adapter.fetch(profile)
                 stats = sync_posts(session, posts, profile.name)
                 _record_run(session, adapter.name, profile.name)
+                run_row.status = "ok"
+                run_row.jobs_found = len(posts)
+                run_row.jobs_new = stats.discovered
+                run_row.jobs_removed = stats.removed
                 report.results.append(
                     RunResult(profile.name, adapter.name, "ok", stats=stats)
                 )
                 logger.info("%s/%s: %s", profile.name, adapter.name, stats.summary())
             except AdapterError as exc:
                 logger.warning("%s/%s failed: %s", profile.name, adapter.name, exc)
+                run_row.status = "failed"
+                run_row.error = str(exc)
                 report.results.append(
                     RunResult(profile.name, adapter.name, "failed", error=str(exc))
                 )
             except Exception as exc:  # noqa: BLE001 — never let one source kill a run
                 logger.exception("%s/%s crashed", profile.name, adapter.name)
+                run_row.status = "failed"
+                run_row.error = str(exc)
                 report.results.append(
                     RunResult(profile.name, adapter.name, "failed", error=str(exc))
                 )
+            finally:
+                run_row.finished_at = datetime.now(UTC)
+                session.commit()
 
             if sleep_jitter:
                 time.sleep(

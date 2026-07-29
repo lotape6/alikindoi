@@ -132,3 +132,23 @@ class SourceRun(Base):
     source: Mapped[str] = mapped_column(String(32))
     profile_name: Mapped[str] = mapped_column(String(128))
     last_run_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class ScrapeRun(Base):
+    """Execution history of every (profile, source) scrape attempt."""
+
+    __tablename__ = "scrape_runs"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    started_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, index=True)
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    trigger: Mapped[str] = mapped_column(String(16), default="scheduler")
+    # scheduler | cli | api
+    profile_name: Mapped[str] = mapped_column(String(128), index=True)
+    source: Mapped[str] = mapped_column(String(32), index=True)
+    status: Mapped[str] = mapped_column(String(24), index=True)
+    # ok | failed | skipped_rate_limit
+    jobs_found: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    jobs_new: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    jobs_removed: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)

@@ -274,9 +274,136 @@ def stats(db: DbSession) -> dict:
 
 
 @app.post("/api/scrape")
-def trigger_scrape() -> dict:
-    """Manually trigger a scrape tick (rate limits still enforced)."""
-    from alikindoi.scheduler import run_tick
+def trigger_scrape(request: ScrapeRequest | None = None) -> dict:
+    """Trigger a scrape in the background (rate limits still enforced
+    unless force=true). Returns immediately; poll /api/scrape/status."""
+    return _start_background_scrape(request or ScrapeRequest())
 
-    run_tick()
-    return {"status": "ok"}
+
+@app.get("/api/scrape/status")
+def scrape_status() -> dict:
+    return dict(_scrape_state)
+
+
+@app.get("/api/runs")
+def list_runs(db: DbSession, limit: int = Query(50, ge=1, le=500)) -> list[dict]:
+    from alikindoi.db.models import ScrapeRun
+
+    rows = db.scalars(
+        select(ScrapeRun).order_by(ScrapeRun.id.desc()).limit(limit)
+    ).all()
+    return [
+        {
+            "id": r.id,
+            "started_at": r.started_at,
+            "finished_at": r.finished_at,
+            "trigger": r.trigger,
+            "profile_name": r.profile_name,
+            "source": r.source,
+            "status": r.status,
+            "jobs_found": r.jobs_found,
+            "jobs_new": r.jobs_new,
+            "jobs_removed": r.jobs_removed,
+            "error": r.error,
+        }
+        for r in rows
+    ]
+
+
+class ProfilePatch(BaseModel):
+    enabled: bool | None = None
+    interval_minutes: int | None = None
+    results_wanted: int | None = None
+    hours_old: int | None = None
+    search_term: str | None = None
+    google_search_term: str | None = None
+    location: str | None = None
+    is_remote: bool | None = None
+    job_type: str | None = None
+    tags: list[str] | None = None
+
+
+@app.get("/api/config")
+def get_runtime_config() -> dict:
+    from alikindoi.config import get_config
+
+    cfg = get_config()
+    return {
+        "search_profiles": [p.model_dump() for p in cfg.search_profiles],
+        "rate_limits": cfg.rate_limits.model_dump(),
+        "sources": cfg.sources,
+        "notifications": cfg.notifications.model_dump(),
+    }
+
+
+@app.patch("/api/config/profiles/{name}")
+def update_profile(name: str, patch: ProfilePatch) -> dict:
+    from alikindoi.config import update_profile_in_yaml
+
+    try:
+        cfg = update_profile_in_yaml(
+            name, patch.model_dump(exclude_none=True)
+        )
+    except KeyError:
+        raise HTTPException(404, f"Profile '{name}' not found") from None
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+    for p in cfg.search_profiles:
+        if p.name == name:
+            return p.model_dump()
+    raise HTTPException(404, f"Profile '{name}' not found")
+
+
+# ---------- Background scrape runner ----------
+
+import threading  # noqa: E402
+
+
+class ScrapeRequest(BaseModel):
+    profile: str | None = None
+    source: str | None = None
+    force: bool = False
+
+
+_scrape_state: dict = {"running": False, "started_at": None, "last_report": None}
+_scrape_lock = threading.Lock()
+
+
+def _start_background_scrape(request: ScrapeRequest) -> dict:
+    if _scrape_state["running"]:
+        raise HTTPException(409, "A scrape is already running")
+
+    def _run() -> None:
+        from alikindoi.adapters.registry import available_adapters
+        from alikindoi.config import get_config
+        from alikindoi.notifications import dispatch_pending_notifications
+        from alikindoi.runner import run_profiles
+
+        session = get_session()
+        try:
+            cfg = get_config()
+            adapters = available_adapters()
+            profiles = [p for p in cfg.search_profiles if p.enabled]
+            if request.source:
+                adapters = [a for a in adapters if a.name == request.source]
+            if request.profile:
+                profiles = [p for p in profiles if p.name == request.profile]
+            report = run_profiles(
+                session, profiles, adapters,
+                force=request.force, sleep_jitter=True, trigger="api",
+            )
+            dispatch_pending_notifications(session, report.new_event_ids)
+            _scrape_state["last_report"] = {
+                r.source + "/" + r.profile: r.status for r in report.results
+            }
+        except Exception as exc:  # noqa: BLE001
+            _scrape_state["last_report"] = {"error": str(exc)}
+        finally:
+            _scrape_state["running"] = False
+            session.close()
+
+    with _scrape_lock:
+        _scrape_state["running"] = True
+        _scrape_state["started_at"] = datetime.now(UTC).isoformat()
+        threading.Thread(target=_run, daemon=True).start()
+    return {"status": "started", "force": request.force}

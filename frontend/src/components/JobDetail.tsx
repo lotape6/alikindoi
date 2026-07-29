@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import ReactMarkdown from 'react-markdown'
 import { fetchJob, patchJob } from '../api'
 
 const STATUSES = ['new', 'saved', 'applied', 'interviewing', 'offer', 'rejected', 'withdrawn']
@@ -104,12 +105,12 @@ export default function JobDetail({ jobId, onClose }: { jobId: number; onClose: 
             </div>
 
             {job.description && (
-              <details className="text-sm">
-                <summary className="cursor-pointer text-slate-400">Description</summary>
-                <p className="mt-2 whitespace-pre-wrap text-slate-300 max-h-96 overflow-y-auto">
-                  {job.description}
-                </p>
-              </details>
+              <div className="text-sm">
+                <h3 className="text-sm font-semibold text-slate-300 mb-2">Description</h3>
+                <div className="description text-slate-300 max-h-[50vh] overflow-y-auto pr-2 rounded bg-slate-900/50 p-3">
+                  <ReactMarkdown>{job.description}</ReactMarkdown>
+                </div>
+              </div>
             )}
 
             <div>

@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+/* Markdown-rendered job descriptions */
+.description h1, .description h2, .description h3, .description h4 {
+  @apply font-semibold text-slate-200 mt-3 mb-1;
+}
+.description p {
+  @apply my-2 leading-relaxed;
+}
+.description ul, .description ol {
+  @apply my-2 pl-5 space-y-1;
+}
+.description ul {
+  @apply list-disc;
+}
+.description ol {
+  @apply list-decimal;
+}
+.description a {
+  @apply text-indigo-400 underline;
+}
+.description strong {
+  @apply text-slate-100;
+}
+.description code {
+  @apply bg-slate-800 px-1 rounded text-xs;
+}

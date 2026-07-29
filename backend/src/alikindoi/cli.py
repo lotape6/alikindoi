@@ -49,7 +49,7 @@ def scrape(
     console.print(
         f"Profiles: {[p.name for p in profiles]} | Sources: {[a.name for a in adapters]}"
     )
-    report = run_profiles(session, profiles, adapters, force=force)
+    report = run_profiles(session, profiles, adapters, force=force, trigger="cli")
     for r in report.results:
         if r.status == "ok":
             console.print(f"[green]{r.profile} / {r.source}[/green]: {r.stats.summary()}")
