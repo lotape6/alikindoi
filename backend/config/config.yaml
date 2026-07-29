@@ -44,7 +44,7 @@ sources:
 
 # Search profiles: each is one scraping unit with its own cadence.
 search_profiles:
-  - name: "remote-spain-python"
+  - name: "python-developer"
     enabled: true
     search_term: "python developer"
     google_search_term: "python developer jobs remote Spain"
@@ -53,21 +53,49 @@ search_profiles:
     adzuna_country: "es"
     is_remote: true
     job_type: "fulltime"
-    tags: ["python", "backend", "remote"]
+    tags: ["python", "software", "developer"]
     results_wanted: 25
     hours_old: 72            # only fresh postings -> fewer requests
     interval_minutes: 360    # every 6h (>= per-source floors enforced)
 
+  - name: "cpp-developer"
+    enabled: true
+    search_term: '"c++" developer'
+    google_search_term: "c++ developer jobs remote Spain"
+    location: "Spain"
+    country_indeed: "Spain"
+    adzuna_country: "es"
+    is_remote: true
+    job_type: "fulltime"
+    tags: ["c++", "software", "developer"]
+    results_wanted: 25
+    hours_old: 72
+    interval_minutes: 360
+
+  - name: "c-developer"
+    enabled: true
+    search_term: '"embedded c" OR "c programmer" developer'
+    google_search_term: "C programmer embedded developer jobs remote Spain"
+    location: "Spain"
+    country_indeed: "Spain"
+    adzuna_country: "es"
+    is_remote: true
+    job_type: "fulltime"
+    tags: ["c", "embedded", "software", "developer"]
+    results_wanted: 25
+    hours_old: 72
+    interval_minutes: 360
+
   - name: "malaga-cadiz-onsite-hybrid"
     enabled: true
-    search_term: "software engineer"
-    google_search_term: "software engineer jobs in Málaga or Cádiz Spain"
+    search_term: 'software engineer (python OR "c++" OR c)'
+    google_search_term: "software engineer python c++ jobs in Málaga or Cádiz Spain"
     location: "Málaga, Spain"
     country_indeed: "Spain"
     adzuna_country: "es"
     is_remote: false
     job_type: null
-    tags: ["software", "malaga", "cadiz", "hybrid", "onsite"]
+    tags: ["python", "c++", "c", "software", "malaga", "cadiz", "hybrid", "onsite"]
     results_wanted: 25
     hours_old: 168           # 1 week — on-site markets move slower
     interval_minutes: 720    # every 12h

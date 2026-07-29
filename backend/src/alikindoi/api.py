@@ -122,7 +122,10 @@ def list_jobs(
     removed: bool = False,
     new_only: bool = Query(False, description="Only unseen (status=new) active jobs"),
     has_salary: bool = False,
-    sort_by: Literal["first_seen_at", "salary_annual_max", "date_posted"] = "first_seen_at",
+    sort_by: Literal[
+        "first_seen_at", "date_posted", "salary_annual_max", "salary_annual_min",
+        "title", "company", "city", "seniority", "remote_type", "source",
+    ] = "first_seen_at",
     sort_dir: Literal["asc", "desc"] = "desc",
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=200),
@@ -318,9 +321,155 @@ class ProfilePatch(BaseModel):
     search_term: str | None = None
     google_search_term: str | None = None
     location: str | None = None
+    country_indeed: str | None = None
+    adzuna_country: str | None = None
     is_remote: bool | None = None
     job_type: str | None = None
     tags: list[str] | None = None
+
+
+class ProfileCreate(BaseModel):
+    name: str
+    enabled: bool = True
+    search_term: str
+    google_search_term: str | None = None
+    location: str | None = None
+    country_indeed: str = "Spain"
+    adzuna_country: str = "es"
+    is_remote: bool | None = None
+    job_type: str | None = None
+    tags: list[str] = []
+    results_wanted: int = 25
+    hours_old: int | None = None
+    interval_minutes: int = 360
+
+
+@app.post("/api/config/profiles", status_code=201)
+def create_profile(profile: ProfileCreate) -> dict:
+    from alikindoi.config import create_profile_in_yaml
+
+    try:
+        cfg = create_profile_in_yaml(profile.model_dump())
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from None
+    for p in cfg.search_profiles:
+        if p.name == profile.name:
+            return p.model_dump()
+    raise HTTPException(500, "Profile not created")
+
+
+@app.delete("/api/config/profiles/{name}", status_code=204)
+def delete_profile(name: str) -> None:
+    from alikindoi.config import delete_profile_in_yaml
+
+    try:
+        delete_profile_in_yaml(name)
+    except KeyError:
+        raise HTTPException(404, f"Profile '{name}' not found") from None
+
+
+@app.get("/api/sources")
+def list_sources(db: DbSession) -> list[dict]:
+    """Every adapter with enabled/available state, rate-limit floor,
+    last-run info and whether it's currently running."""
+    from alikindoi.adapters.adzuna import AdzunaAdapter
+    from alikindoi.adapters.jobspy_adapter import JOBSPY_SITES, JobSpyAdapter
+    from alikindoi.adapters.remotive import RemotiveAdapter
+    from alikindoi.adapters.themuse import TheMuseAdapter
+    from alikindoi.config import HARD_MIN_INTERVALS, get_config
+    from alikindoi.db.models import ScrapeRun
+
+    cfg = get_config()
+    adapters = [
+        *(JobSpyAdapter(site) for site in JOBSPY_SITES),
+        AdzunaAdapter(),
+        RemotiveAdapter(),
+        TheMuseAdapter(),
+    ]
+    kind = {site: "scraper" for site in JOBSPY_SITES}
+    kind.update({"adzuna": "api", "remotive": "api", "themuse": "api"})
+
+    latest_runs: dict[str, ScrapeRun] = {}
+    for run in db.scalars(
+        select(ScrapeRun).order_by(ScrapeRun.id.desc()).limit(200)
+    ):
+        latest_runs.setdefault(run.source, run)
+
+    out = []
+    for adapter in adapters:
+        last = latest_runs.get(adapter.name)
+        out.append(
+            {
+                "name": adapter.name,
+                "kind": kind[adapter.name],
+                "enabled": cfg.source_enabled(adapter.name),
+                "available": adapter.is_available(),
+                "min_interval_minutes": cfg.rate_limits.min_interval_minutes.get(
+                    adapter.name, HARD_MIN_INTERVALS.get(adapter.name)
+                ),
+                "last_run": (
+                    {
+                        "at": last.started_at,
+                        "status": last.status,
+                        "jobs_found": last.jobs_found,
+                        "jobs_new": last.jobs_new,
+                        "error": last.error,
+                    }
+                    if last
+                    else None
+                ),
+                "running": bool(last and last.finished_at is None),
+            }
+        )
+    return out
+
+
+@app.get("/api/stats/timeline")
+def stats_timeline(db: DbSession, days: int = Query(30, ge=1, le=365)) -> list[dict]:
+    """Per-day job discovery / removal / scrape activity for charts."""
+    from datetime import timedelta
+
+    from alikindoi.db.models import ScrapeRun
+
+    cutoff = datetime.now(UTC) - timedelta(days=days)
+    discovered = dict(
+        db.execute(
+            select(func.date(Job.first_seen_at), func.count())
+            .where(Job.first_seen_at >= cutoff)
+            .group_by(func.date(Job.first_seen_at))
+        ).all()
+    )
+    removed = dict(
+        db.execute(
+            select(func.date(JobEvent.created_at), func.count())
+            .where(JobEvent.event_type == "removed", JobEvent.created_at >= cutoff)
+            .group_by(func.date(JobEvent.created_at))
+        ).all()
+    )
+    found_rows = db.execute(
+        select(
+            func.date(ScrapeRun.started_at),
+            func.coalesce(func.sum(ScrapeRun.jobs_found), 0),
+            func.coalesce(func.sum(ScrapeRun.jobs_new), 0),
+            func.count(),
+        )
+        .where(ScrapeRun.started_at >= cutoff, ScrapeRun.status == "ok")
+        .group_by(func.date(ScrapeRun.started_at))
+    ).all()
+    runs = {d: {"found": f, "new": n, "runs": c} for d, f, n, c in found_rows}
+
+    all_dates = sorted(set(discovered) | set(removed) | set(runs))
+    return [
+        {
+            "date": d,
+            "discovered": discovered.get(d, 0),
+            "removed": removed.get(d, 0),
+            "jobs_found": runs.get(d, {}).get("found", 0),
+            "jobs_new": runs.get(d, {}).get("new", 0),
+            "runs": runs.get(d, {}).get("runs", 0),
+        }
+        for d in all_dates
+    ]
 
 
 @app.get("/api/config")
