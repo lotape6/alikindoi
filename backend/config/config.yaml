@@ -33,7 +33,7 @@ rate_limits:
 sources:
   jobspy:   # scrapers — no keys needed
     indeed: { enabled: true }
-    google: { enabled: true }
+    google: { enabled: false }   # Google CAPTCHAs datacenter IPs; enable with proxies
     linkedin: { enabled: false }   # enable only with proxies; see .env SCRAPER_PROXIES
     glassdoor: { enabled: false }  # Cloudflare-protected, unreliable
     zip_recruiter: { enabled: false }  # US/Canada only

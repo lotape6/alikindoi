@@ -20,9 +20,13 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
     jobspy (indeed/google/linkedin/glassdoor/zip_recruiter), adzuna, remotive, themuse
   - `enrichment.py` — seniority parsing, salary annualization, tag extraction
   - `sync.py` — upsert/dedup/change-detection/removal-marking engine
-  - `runner.py` — rate-limited run orchestration shared by CLI & scheduler
+  - `salary_parser.py` — multilingual salary extraction from free text
+  - `textnorm.py` — description normalization (HTML→markdown, unescape)
+  - `runner.py` — rate-limited run orchestration shared by CLI & scheduler;
+    records every execution in `scrape_runs`
   - `scheduler.py` — APScheduler ticks (coalesced, persisted `source_runs`)
-  - `api.py` — FastAPI REST API (`/api/jobs`, `/api/stats`, `/api/tags`, `/api/filters`)
+  - `api.py` — FastAPI REST API (`/api/jobs`, `/api/stats`, `/api/tags`,
+    `/api/filters`, `/api/runs`, `/api/config`, `/api/scrape`)
   - `notifications.py` — Telegram/Discord/email, immediate or daily digest
   - `cli.py` — Typer CLI (`scrape`, `schedule`, `serve`, `list`, `status`)
 - `backend/config/config.yaml` — search profiles & scheduler config (user-editable)
@@ -35,6 +39,7 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
 - Setup: `uv venv && uv pip install -e ".[dev]"`
 - Tests: `.venv/bin/pytest`
 - Scrape all enabled profiles: `.venv/bin/python -m alikindoi scrape`
+- Re-enrich existing jobs (salary/descriptions): `.venv/bin/python -m alikindoi backfill`
 - Periodic scheduler: `.venv/bin/python -m alikindoi schedule`
 - API server: `.venv/bin/python -m alikindoi serve` (docs at /docs)
 - List jobs: `.venv/bin/python -m alikindoi list`

@@ -12,10 +12,24 @@ human/browser. Check them off as you go.
 - [ ] Job table loads with the ~53 jobs already scraped
 - [ ] Filters work: try search text, Tag = `python`, Remote type = `remote`,
       City = `Málaga`, 🆕 New only, ⚠️ Removed (should be empty initially)
-- [ ] Click a job → drawer opens with description, tags, history timeline
+- [ ] Click a job → drawer opens with **auto-expanded, formatted description**
+      (bullets/headings rendered, no raw HTML or `\` escapes), tags, history
+- [ ] Jobs with salaries show a range (e.g. the HASKONING BIM postings show
+      30,184–43,106 EUR/yr, matching the real posting)
 - [ ] Change status to `applied` → badge updates in the table; history shows
       "📨 Applied"; `Open posting ↗` opens the real listing
 - [ ] Add a note, click away, reopen the job → note persisted
+
+## 1b. Scraping admin view (⚙️ Scraping tab)
+
+- [ ] Profiles table shows both profiles; toggle one off → persists after
+      page reload (written back to `config.yaml`)
+- [ ] Change "Every (min)" for a profile, reload → value persisted
+- [ ] "▶ Run now" on a profile → status shows "⏳ Scrape running…", and new
+      rows appear in Run history (auto-refreshes every 10s)
+- [ ] Run history shows trigger (scheduler/cli/api), per-source status
+      (ok / skipped_rate_limit / failed) and found/new/removed counts
+- [ ] Run twice quickly → second run's sources show `skipped_rate_limit`
 
 ## 2. Tracking / sync over time (needs 2+ scrape runs, e.g. next day)
 

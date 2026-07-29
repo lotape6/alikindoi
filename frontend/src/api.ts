@@ -110,3 +110,78 @@ export async function patchJob(
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
   return res.json()
 }
+
+// ---------- Admin ----------
+
+export interface ScrapeRun {
+  id: number
+  started_at: string
+  finished_at: string | null
+  trigger: string
+  profile_name: string
+  source: string
+  status: string
+  jobs_found: number | null
+  jobs_new: number | null
+  jobs_removed: number | null
+  error: string | null
+}
+
+export interface SearchProfile {
+  name: string
+  enabled: boolean
+  search_term: string
+  google_search_term: string | null
+  location: string | null
+  is_remote: boolean | null
+  job_type: string | null
+  tags: string[]
+  results_wanted: number
+  hours_old: number | null
+  interval_minutes: number
+}
+
+export interface RuntimeConfig {
+  search_profiles: SearchProfile[]
+  rate_limits: Record<string, unknown>
+  sources: Record<string, Record<string, { enabled: boolean }>>
+  notifications: Record<string, unknown>
+}
+
+export const fetchRuns = (): Promise<ScrapeRun[]> => get('/api/runs?limit=50')
+
+export const fetchConfig = (): Promise<RuntimeConfig> => get('/api/config')
+
+export const fetchScrapeStatus = (): Promise<{
+  running: boolean
+  started_at: string | null
+  last_report: Record<string, string> | null
+}> => get('/api/scrape/status')
+
+export async function patchProfile(
+  name: string,
+  patch: Partial<SearchProfile>,
+): Promise<SearchProfile> {
+  const res = await fetch(`/api/config/profiles/${encodeURIComponent(name)}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(patch),
+  })
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+  return res.json()
+}
+
+export async function triggerScrape(body: {
+  profile?: string
+  source?: string
+  force?: boolean
+}): Promise<{ status: string }> {
+  const res = await fetch('/api/scrape', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+  return res.json()
+}
+

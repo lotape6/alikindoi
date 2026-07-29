@@ -23,11 +23,15 @@ Check items off as you complete them. Keep secrets in `.env` (never commit).
 - [ ] **Email digest** — set `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD`,
       `NOTIFY_EMAIL_TO` in `.env` (Gmail needs an app password).
 
-## LinkedIn (high value, high ban risk — optional)
+## Scraping sources
 
-- [ ] Only if you accept the risk: get a few rotating proxies, set
-      `SCRAPER_PROXIES` in `.env`, enable `sources.jobspy.linkedin`.
-      The scheduler already enforces a ≥12h LinkedIn cadence.
+- [ ] **Google Jobs is disabled by default**: Google serves CAPTCHAs to
+      datacenter/container IPs (observed as `/sorry/` failures in the run
+      history). Re-enable `sources.jobspy.google` only together with
+      `SCRAPER_PROXIES`, or accept intermittent failures.
+- [ ] **LinkedIn** (high value, high ban risk): only if you accept the risk —
+      get rotating proxies, set `SCRAPER_PROXIES` in `.env`, enable
+      `sources.jobspy.linkedin`. The scheduler already enforces ≥12h cadence.
 
 ## Personalization
 
