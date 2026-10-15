@@ -79,3 +79,8 @@ def test_criteria_roundtrip(client):
     assert r.json()["location"]["hybrid_cities"] == ["malaga"]
     assert client.patch("/api/config/criteria", json={"bogus": 1}).status_code == 422
     assert client.patch("/api/config/criteria", json={"min_salary_eur": "lots"}).status_code == 422
+
+
+def test_city_and_search_ignore_accents(client):
+    assert client.get("/api/jobs", params={"city": "malaga"}).json()["total"] == 2
+    assert client.get("/api/jobs", params={"q": "robotica"}).json()["total"] == 1

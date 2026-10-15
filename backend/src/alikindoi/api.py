@@ -12,7 +12,7 @@ from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session, selectinload
 
 from alikindoi.db.models import Job, JobEvent, JobTag
-from alikindoi.db.session import get_session, init_db
+from alikindoi.db.session import _fold, get_session, init_db
 
 app = FastAPI(title="Alikindoi", version="0.1.0")
 
@@ -214,12 +214,11 @@ def list_jobs(
     if new_only:
         stmt = stmt.where(Job.app_status == "new")
     if q:
-        like = f"%{q}%"
+        like = f"%{_fold(q)}%"
         stmt = stmt.where(
-            or_(
-                Job.title.ilike(like), Job.company.ilike(like), Job.description.ilike(like),
-                Job.city.ilike(like), Job.region.ilike(like), Job.app_notes.ilike(like),
-            )
+            or_(*(func.fold(col).like(like) for col in (
+                Job.title, Job.company, Job.description, Job.city, Job.region, Job.app_notes,
+            )))
         )
     if source:
         stmt = stmt.where(or_(Job.source.in_(source), Job.aliases.any(Job.source.in_(source))))
@@ -228,7 +227,8 @@ def list_jobs(
     if remote_type:
         stmt = stmt.where(Job.remote_type.in_(remote_type))
     if city:
-        stmt = stmt.where(Job.city.ilike(f"%{city}%"))
+        folded = f"%{_fold(city)}%"
+        stmt = stmt.where(or_(func.fold(Job.city).like(folded), func.fold(Job.region).like(folded)))
     if app_status:
         stmt = stmt.where(Job.app_status.in_(app_status))
     if has_salary:

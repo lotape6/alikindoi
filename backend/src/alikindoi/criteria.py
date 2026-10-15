@@ -21,7 +21,7 @@ _REGION_LOCKED = re.compile(
     r"|must (be|reside|live)[^.]{0,40}\b(united states|u\.s\.|usa|canada)\b"
     r"|\b(us|u\.s\.) (citizenship|citizens|work authorization) (is )?required\b"
     r"|security clearance",
-    re.I,
+    re.IGNORECASE,
 )
 _UNRESTRICTED = {"", "anywhere", "worldwide", "remote", "global", "anywhere in the world"}
 

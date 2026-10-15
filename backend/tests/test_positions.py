@@ -4,7 +4,13 @@ from datetime import UTC, date, datetime, timedelta
 from sqlalchemy import select
 
 from alikindoi.db.models import Job
-from alikindoi.sync import SyncStats, check_closed, close_listing, sync_posts, upsert_post
+from alikindoi.sync import (
+    SyncStats,
+    check_closed,
+    close_listing,
+    sync_posts,
+    upsert_post,
+)
 
 
 def _same_position(make_post):

@@ -17,7 +17,10 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
   - `schemas.py` — normalized `JobPost` dataclass shared by all adapters
   - `db/models.py`, `db/session.py` — SQLAlchemy models & engine (SQLite WAL)
   - `adapters/` — one adapter per source (`base.py` defines the interface):
-    jobspy (indeed/google/linkedin/glassdoor/zip_recruiter), adzuna, remotive, themuse
+    jobspy (indeed/google/linkedin/glassdoor/zip_recruiter), adzuna, remotive, themuse,
+    himalayas, remoteok, jobicy, arbeitnow, weworkremotely (`_feeds.py` shared helpers)
+  - `criteria.py` — search criteria: match/no-match, EUR salary, 0-100 fit score
+  - `maintenance.py` — one-off upgrade of older databases (run on API startup)
   - `enrichment.py` — seniority parsing, salary annualization, tag extraction
   - `sync.py` — upsert/dedup/change-detection/removal-marking engine
   - `salary_parser.py` — multilingual salary extraction from free text
@@ -51,6 +54,12 @@ updated, removed, applied) and expose the data via REST API + React dashboard.
 
 ## Conventions & rules
 - Never hard-delete jobs; tombstone via `is_active=False` + `job_events` entry.
+- One position = one record: a posting matching an open position from another
+  board (same normalized company + title) gets `canonical_id` pointing to it.
+  Lists show canonical rows only; a position closes when its last listing
+  closes (`close_listing` in `sync.py`). `salary_annual_*` are in EUR.
+- New DB columns must be nullable or have a server default: `init_db` adds
+  missing columns with ALTER TABLE (no migration tool).
 - Every mutation of a job (incl. user edits via PATCH) writes a `job_events`
   row (audit trail). User edits use the `edited` event type.
 - Anti-ban is a hard requirement: per-source rate limits, jitter, backoff on

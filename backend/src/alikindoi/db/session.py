@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import unicodedata
 from pathlib import Path
 
 from sqlalchemy import create_engine, event, inspect, text
@@ -14,6 +15,13 @@ _engine: Engine | None = None
 _session_factory: sessionmaker[Session] | None = None
 
 
+def _fold(text: str | None) -> str | None:
+    if text is None:
+        return None
+    text = unicodedata.normalize("NFKD", text)
+    return "".join(c for c in text if not unicodedata.combining(c)).lower()
+
+
 def _enable_sqlite_pragmas(engine: Engine) -> None:
     @event.listens_for(engine, "connect")
     def _set_pragma(dbapi_conn, _):  # type: ignore[no-untyped-def]
@@ -21,6 +29,8 @@ def _enable_sqlite_pragmas(engine: Engine) -> None:
         cursor.execute("PRAGMA journal_mode=WAL")
         cursor.execute("PRAGMA foreign_keys=ON")
         cursor.close()
+        # Accent-insensitive matching for city/search filters ('malaga' finds 'Málaga').
+        dbapi_conn.create_function("fold", 1, _fold, deterministic=True)
 
 
 def get_engine(database_url: str | None = None) -> Engine:

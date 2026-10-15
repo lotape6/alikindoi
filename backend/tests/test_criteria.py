@@ -11,9 +11,11 @@ CRITERIA = Criteria(
 
 
 def check(make_post, **kw):
-    defaults = dict(title="Senior Robotics Software Engineer", remote_type="remote", is_remote=True,
-                    city=None, region="Spain", salary_min=None, salary_max=None, salary_currency=None,
-                    salary_interval=None)
+    defaults = {
+        "title": "Senior Robotics Software Engineer", "remote_type": "remote", "is_remote": True,
+        "city": None, "region": "Spain", "salary_min": None, "salary_max": None,
+        "salary_currency": None, "salary_interval": None,
+    }
     defaults.update(kw)
     return evaluate(make_post(**defaults), CRITERIA)
 

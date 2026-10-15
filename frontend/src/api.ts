@@ -26,6 +26,28 @@ export interface Job {
   app_status: string
   profile_name: string | null
   tags: string[]
+  fit_score: number | null
+  fit_notes: string[] | null
+  closed_at: string | null
+  closed_reason: string | null
+  expires_at: string | null
+  next_action: string | null
+  next_action_at: string | null
+  starred: boolean
+  sources: string[]
+}
+
+export interface Listing {
+  id: number
+  source: string
+  url: string
+  is_open: boolean
+  first_seen_at: string
+  last_seen_at: string
+  closed_at: string | null
+  salary_min: number | null
+  salary_max: number | null
+  salary_currency: string | null
 }
 
 export interface JobEvent {
@@ -39,6 +61,8 @@ export interface JobDetail extends Job {
   description: string | null
   app_notes: string | null
   applied_at: string | null
+  contact: string | null
+  listings: Listing[]
   events: JobEvent[]
 }
 
@@ -55,6 +79,9 @@ export interface JobFilters {
   removed?: boolean
   new_only?: boolean
   has_salary?: boolean
+  fit_min?: number
+  starred?: boolean
+  follow_up_due?: boolean
   sort_by?: string
   sort_dir?: 'asc' | 'desc'
   page?: number
@@ -104,6 +131,11 @@ export const fetchFilterOptions = (): Promise<{
 export interface JobPatch {
   app_status?: string
   app_notes?: string
+  next_action?: string
+  next_action_at?: string
+  contact?: string
+  starred?: boolean
+  is_open?: boolean
   title?: string
   company?: string
   city?: string
@@ -264,3 +296,42 @@ export async function deleteProfile(name: string): Promise<void> {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
 }
 
+
+// ---------- Views, closing and criteria ----------
+
+export type ViewCounts = Record<
+  'inbox' | 'all' | 'starred' | 'saved' | 'applied' | 'interviewing' | 'offer' | 'follow_up' | 'archived' | 'closed',
+  number
+>
+
+export const fetchViews = (): Promise<ViewCounts> => get('/api/views')
+
+export async function checkClosed(): Promise<{ closed: number }> {
+  const res = await fetch('/api/jobs/check-closed', { method: 'POST' })
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+  return res.json()
+}
+
+export interface Criteria {
+  enabled: boolean
+  min_salary_eur: number | null
+  keep_unknown_salary: boolean
+  seniority: string[]
+  role_keywords: string[]
+  exclude_title_keywords: string[]
+  boost_keywords: string[]
+  location: { remote_allowed_regions: string[]; hybrid_cities: string[] }
+  fx_to_eur: Record<string, number>
+}
+
+export const fetchCriteria = (): Promise<Criteria> => get('/api/config/criteria')
+
+export async function patchCriteria(patch: Partial<Criteria>): Promise<Criteria> {
+  const res = await fetch('/api/config/criteria', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(patch),
+  })
+  if (!res.ok) throw new Error((await res.json()).detail ?? `${res.status}`)
+  return res.json()
+}

@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from alikindoi.adapters.base import BaseAdapter
 from alikindoi.adapters.adzuna import AdzunaAdapter
 from alikindoi.adapters.arbeitnow import ArbeitnowAdapter
+from alikindoi.adapters.base import BaseAdapter
 from alikindoi.adapters.himalayas import HimalayasAdapter
 from alikindoi.adapters.jobicy import JobicyAdapter
 from alikindoi.adapters.jobspy_adapter import JOBSPY_SITES, JobSpyAdapter
-from alikindoi.adapters.remotive import RemotiveAdapter
 from alikindoi.adapters.remoteok import RemoteOKAdapter
+from alikindoi.adapters.remotive import RemotiveAdapter
 from alikindoi.adapters.themuse import TheMuseAdapter
 from alikindoi.adapters.weworkremotely import WeWorkRemotelyAdapter
 
