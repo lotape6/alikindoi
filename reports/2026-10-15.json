@@ -1,0 +1,3278 @@
+{
+ "date": "2026-10-15",
+ "stats": {
+  "fetched": 1361,
+  "matched": 103,
+  "already_seen": 0,
+  "sources": {
+   "himalayas": {
+    "fetched": 62,
+    "matched": 40
+   },
+   "remotive": {
+    "fetched": 42,
+    "matched": 24
+   },
+   "remoteok": {
+    "fetched": 209,
+    "matched": 4
+   },
+   "jobicy": {
+    "fetched": 69,
+    "matched": 13
+   },
+   "arbeitnow": {
+    "fetched": 900,
+    "matched": 5
+   },
+   "rss": {
+    "fetched": 79,
+    "matched": 17
+   }
+  }
+ },
+ "jobs": [
+  {
+   "source": "himalayas",
+   "title": "Strategic Project Lead, Robotics",
+   "company": "micro1",
+   "url": "https://himalayas.app/companies/micro1/jobs/strategic-project-lead-robotics",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": 300000.0,
+   "salary_max": 500000.0,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "Robotics-Project-Manager",
+    "Strategic-Project-Lead",
+    "Robotics-Implementation-Lead",
+    "Strategic-Project-Leader",
+    "Robotics-Program-Manager",
+    "Strategic-Project-Manager",
+    "Robotics-Project-Management"
+   ],
+   "seniority": [
+    "Manager"
+   ],
+   "posted": "2026-10-07T08:59:37+00:00",
+   "salary_eur_max": 460000.0,
+   "score": 13.7,
+   "notes": [],
+   "key": "micro1|strategic project lead robotics"
+  },
+  {
+   "source": "himalayas",
+   "title": "Front End Design Verification Engineer",
+   "company": "Tenstorrent",
+   "url": "https://himalayas.app/companies/tenstorrent/jobs/front-end-design-verification-engineer",
+   "location": "Spain, United States",
+   "remote": true,
+   "regions": [
+    "Spain",
+    "United States"
+   ],
+   "salary_min": 100000.0,
+   "salary_max": 500000.0,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "Design-Verification",
+    "CPU-Verification-Engineer",
+    "RTL-Verification",
+    "Hardware-Engineering",
+    "ASIC-Verification",
+    "Design-Verification-Engineer",
+    "Verification-Engineer",
+    "Hardware-Verification-Engineer",
+    "Pre-Silicon-Verification-Engineer",
+    "Senior-Verification-Engineer",
+    "IC-Verification-Engineer",
+    "Design-Verification-Engineering"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-18T18:28:16+00:00",
+   "salary_eur_max": 460000.0,
+   "score": 11.7,
+   "notes": [],
+   "key": "tenstorrent|front end design verification engineer"
+  },
+  {
+   "source": "himalayas",
+   "title": "Robotics & Simulation Engineer",
+   "company": "Plain Concepts",
+   "url": "https://himalayas.app/companies/plain-concepts/jobs/robotics-simulation-engineer",
+   "location": "Spain",
+   "remote": true,
+   "regions": [
+    "Spain"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Robotics-Engineering",
+    "Simulation-Engineering",
+    "Physical-AI",
+    "Autonomous-Systems-Engineering",
+    "Research",
+    "Robotics-Simulation-Engineer",
+    "Robot-Simulation-Programmer",
+    "Simulation-Engineer",
+    "Robotics-Engineer",
+    "Hardware-Simulation-Engineer",
+    "System-Simulation-Engineer",
+    "Simulator-Engineer",
+    "Robotics-Software-Engineer",
+    "Senior-Simulation-Engineer",
+    "Robotics-AI-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-04T19:57:39+00:00",
+   "salary_eur_max": null,
+   "score": 9.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "plain concepts|robotics simulation engineer"
+  },
+  {
+   "source": "himalayas",
+   "title": "Lead Machine Learning Engineer (Robotics & Computer Vision)",
+   "company": "Red Sky",
+   "url": "https://himalayas.app/companies/red-sky/jobs/lead-machine-learning-engineer-robotics-computer-vision",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": 18000.0,
+   "salary_max": 18000.0,
+   "currency": "PLN",
+   "salary_period": "month",
+   "tags": [
+    "Lead-Machine-Learning-Engineer",
+    "Computer-Vision-Engineer",
+    "Robotics-Machine-Learning-Engineer",
+    "Deep-Learning-Engineer",
+    "AI-ML-Leadership",
+    "Lead-AI-ML-Engineer",
+    "Machine-Learning-Engineering-Lead",
+    "Lead-ML-Engineer",
+    "Machine-Learning-Lead",
+    "Machine-Learning-Technical-Lead",
+    "Senior-Lead-AI-Engineer",
+    "Lead-AI-Engineer",
+    "Senior-AI-ML-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-05T16:48:22+00:00",
+   "salary_eur_max": 49680.0,
+   "score": 8.99,
+   "notes": [],
+   "key": "red sky|lead machine learning engineer robotics computer vision"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer CCIP",
+   "company": "Chainlink Labs",
+   "url": "https://himalayas.app/companies/chainlink-labs/jobs/senior-software-engineer-ccip",
+   "location": "Argentina, Belgium, Brazil, Canada, Colombia, Greece, Ireland, Mexico, Netherlands, Poland, Portugal, Spain, United Kingdom, United States",
+   "remote": true,
+   "regions": [
+    "Argentina",
+    "Belgium",
+    "Brazil",
+    "Canada",
+    "Colombia",
+    "Greece",
+    "Ireland",
+    "Mexico",
+    "Netherlands",
+    "Poland",
+    "Portugal",
+    "Spain",
+    "United Kingdom",
+    "United States"
+   ],
+   "salary_min": 192000.0,
+   "salary_max": 260000.0,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "Senior-Software-Engineer-C++",
+    "Senior-C++-Software-Engineer",
+    "Senior-Software-Developer",
+    "Senior-Software-Engineer-Jobs",
+    "Senior-Programmer",
+    "Software-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-30T10:24:08+00:00",
+   "salary_eur_max": 239200.0,
+   "score": 8.78,
+   "notes": [],
+   "key": "chainlink labs|senior software engineer ccip"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer",
+   "company": "Federato",
+   "url": "https://himalayas.app/companies/federato/jobs/senior-software-engineer",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": 170000.0,
+   "salary_max": 210000.0,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Fullstack-Development",
+    "Backend-Engineering",
+    "Frontend-Engineer",
+    "Senior-Software-Developer",
+    "Senior-Software-Engineer-Jobs",
+    "Senior-Engineer",
+    "Senior-Lead-Software-Developer",
+    "Senior-C#-.NET-Software-Engineer",
+    "Senior-Java-Software-Engineer",
+    "Senior-Systems-Software-Engineer",
+    "Senior-Software-Engineer-C++",
+    "Full-Stack-Engineer",
+    "Senior-App-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-08-30T07:54:00+00:00",
+   "salary_eur_max": 193200.0,
+   "score": 7.86,
+   "notes": [],
+   "key": "federato|senior software engineer"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior Independent AI Engineer / Architect",
+   "company": "A.Team",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-independent-ai-engineer-architect-1919266",
+   "location": "Americas, Europe, Israel",
+   "remote": true,
+   "regions": [
+    "Americas",
+    "Europe",
+    "Israel"
+   ],
+   "salary_min": 120.0,
+   "salary_max": 170.0,
+   "currency": "USD",
+   "salary_period": "hour",
+   "tags": [
+    "go",
+    "UI/UX",
+    "wordpress",
+    "chat",
+    "apple",
+    "testing",
+    "catalyst"
+   ],
+   "seniority": [],
+   "posted": "2026-09-16T10:10:53+00:00",
+   "salary_eur_max": 275264.0,
+   "score": 7.51,
+   "notes": [],
+   "key": "a.team|senior independent ai engineer architect"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior Independent Software Developer",
+   "company": "A.Team",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-independent-software-developer-1919265",
+   "location": "Americas, Europe, Israel",
+   "remote": true,
+   "regions": [
+    "Americas",
+    "Europe",
+    "Israel"
+   ],
+   "salary_min": 90.0,
+   "salary_max": 150.0,
+   "currency": "USD",
+   "salary_period": "hour",
+   "tags": [
+    "go",
+    "wordpress",
+    "chat",
+    "apple",
+    "testing",
+    "catalyst"
+   ],
+   "seniority": [],
+   "posted": "2026-09-16T10:10:59+00:00",
+   "salary_eur_max": 242880.0,
+   "score": 7.36,
+   "notes": [],
+   "key": "a.team|senior independent software developer"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer (Mobile SDK, Android)",
+   "company": "Ookla",
+   "url": "https://himalayas.app/companies/ookla/jobs/senior-software-engineer-mobile-sdk-android-5025625402",
+   "location": "Spain",
+   "remote": true,
+   "regions": [
+    "Spain"
+   ],
+   "salary_min": 50000.0,
+   "salary_max": 74500.0,
+   "currency": "EUR",
+   "salary_period": "year",
+   "tags": [
+    "Android-Development",
+    "Mobile-SDK",
+    "Software-Engineer",
+    "C++-Programming",
+    "Network-Engineer",
+    "Senior-Mobile-Engineer-(Android)",
+    "Senior-Mobile-Developer-(Android)",
+    "Senior-Android-Engineer",
+    "Senior-Mobile-Engineer",
+    "Android-Developer",
+    "Senior-Mobile-Developer",
+    "Senior-Mobile-Engineering",
+    "Senior-Mobile-App-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-08-31T10:59:19+00:00",
+   "salary_eur_max": 74500.0,
+   "score": 6.49,
+   "notes": [],
+   "key": "ookla|senior software engineer mobile sdk android"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer- Application",
+   "company": "ST Engineering iDirect",
+   "url": "https://himalayas.app/companies/st-engineering-idirect/jobs/senior-software-engineer-application",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Satellite-Communications",
+    "Embedded-Systems",
+    "C++-Programming",
+    "Systems-Engineering",
+    "Senior-Software-Engineer-Jobs",
+    "Senior-Software-Developer",
+    "Senior-Software-Developer-Positions",
+    "Senior-App-Engineer",
+    "Senior-Software-Development-Openings",
+    "Senior-Application-Development",
+    "Senior-Software-Development",
+    "Senior-Application-Developer",
+    "Senior-Applications-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-08-23T07:36:39+00:00",
+   "salary_eur_max": null,
+   "score": 6.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "st engineering idirect|senior software engineer application"
+  },
+  {
+   "source": "himalayas",
+   "title": "Backend Software Engineer (Senior/Staff)",
+   "company": "DualEntry",
+   "url": "https://himalayas.app/companies/dualentry/jobs/backend-software-engineer-senior-staff-4842909447",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": 100000.0,
+   "salary_max": 175000.0,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "Backend-Engineer",
+    "Software-Engineer",
+    "Python-Developer",
+    "Staff-Backend-Software-Engineer",
+    "Staff-Software-Engineer-Backend",
+    "Senior-Backend-Engineering",
+    "Staff-Backend-Engineer",
+    "Senior-Backend-Development",
+    "Senior-Backend-Engineer-(Java-Kotlin)",
+    "Senior-Java-Backend-Engineer",
+    "Senior-Ruby-Backend-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-01T05:54:24+00:00",
+   "salary_eur_max": 161000.0,
+   "score": 5.22,
+   "notes": [],
+   "key": "dualentry|backend software engineer senior staff"
+  },
+  {
+   "source": "himalayas",
+   "title": "Member of Technical Staff, Robotics Research",
+   "company": "micro1",
+   "url": "https://himalayas.app/companies/micro1/jobs/member-of-technical-staff-robotics-research",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "Robotics-Research-Scientist",
+    "Robotics-Research-Jobs",
+    "Staff-Research-Scientist",
+    "Robotics-Engineer",
+    "Senior-Robotics-Engineer",
+    "Member-Of-Technical-Staff",
+    "Principal-Robotics-Engineer",
+    "Robotics-Software-Engineer"
+   ],
+   "seniority": [
+    "Mid-level",
+    "Senior"
+   ],
+   "posted": "2026-08-22T21:17:32+00:00",
+   "salary_eur_max": null,
+   "score": 5.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "micro1|member of technical staff robotics research"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior Shopify Developer",
+   "company": "Sanctuary Computer Inc",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-shopify-developer-2091140",
+   "location": "Worldwide",
+   "remote": true,
+   "regions": [
+    "Worldwide"
+   ],
+   "salary_min": 80000.0,
+   "salary_max": 150000.0,
+   "currency": "USD",
+   "salary_period": "year",
+   "tags": [
+    "admin",
+    "api",
+    "backend",
+    "CSS",
+    "frontend",
+    "fullstack",
+    "graphql",
+    "node.js",
+    "postgresql",
+    "redux",
+    "seo",
+    "shopify",
+    "video",
+    "open source",
+    "paas",
+    "Figma",
+    "documentation",
+    "analytics",
+    "brand design",
+    "Typescript ",
+    "Redis",
+    "cypress",
+    "IoT",
+    "runtime",
+    "JSON",
+    "responsive",
+    "prismic",
+    "motion design",
+    "testing",
+    "themes",
+    "next.js",
+    "CMS",
+    "jest",
+    "REST",
+    "web sockets",
+    "performance optimization",
+    "mobile development"
+   ],
+   "seniority": [],
+   "posted": "2026-09-18T15:10:28+00:00",
+   "salary_eur_max": 138000.0,
+   "score": 4.76,
+   "notes": [],
+   "key": "sanctuary computer|senior shopify developer"
+  },
+  {
+   "source": "himalayas",
+   "title": "🌍 Computer Vision Specialist, Remote- Contract",
+   "company": "Xperteez Technology",
+   "url": "https://himalayas.app/companies/xperteez-technology/jobs/computer-vision-specialist-remote-contract",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": "USD",
+   "salary_period": "hour",
+   "tags": [
+    "Computer-Vision-Specialist",
+    "Data-Annotator",
+    "AI-Trainer",
+    "Video-Annotator",
+    "Annotation-Specialist",
+    "Remote-Senior-Computer-Vision-Scientist",
+    "Computer-Vision-ML-Engineer",
+    "Computer-Vision-Engineer",
+    "Computer-Vision-and-Machine-Learning-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-03T05:17:09+00:00",
+   "salary_eur_max": null,
+   "score": 4.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "xperteez technology|computer vision specialist remote contract"
+  },
+  {
+   "source": "himalayas",
+   "title": "🌍 Control System Engineer, Remote- Contract",
+   "company": "Xperteez Technology",
+   "url": "https://himalayas.app/companies/xperteez-technology/jobs/control-system-engineer-remote-contract",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": "USD",
+   "salary_period": "hour",
+   "tags": [
+    "Control-Systems-Engineer",
+    "Controls-Engineer",
+    "Systems-Engineer",
+    "Robotics-Engineer",
+    "Automation-Engineer",
+    "Controls-Systems-Engineer",
+    "Industrial-Control-Systems-Engineer",
+    "Process-Automation-Controls-Engineer",
+    "Lead-Control-Systems-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-08T13:54:15+00:00",
+   "salary_eur_max": null,
+   "score": 4.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "xperteez technology|control system engineer remote contract"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer, Back-end (Fraud)",
+   "company": "Affirm",
+   "url": "https://himalayas.app/companies/affirm/jobs/senior-software-engineer-back-end-fraud-2561342260",
+   "location": "Spain",
+   "remote": true,
+   "regions": [
+    "Spain"
+   ],
+   "salary_min": 86000.0,
+   "salary_max": 122000.0,
+   "currency": "EUR",
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Backend-Engineering",
+    "Fraud-Engineering",
+    "Risk-Engineering",
+    "Backend-Engineer",
+    "Senior-Anti-Fraud-Software-Engineer",
+    "Senior-Fraud-Engineering-Manager",
+    "Senior-Fraud-Detection-Engineer",
+    "Senior-Financial-Crime-Engineering-Manager",
+    "Senior-Backend-Engineer-(Fintech)"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-22T20:33:22+00:00",
+   "salary_eur_max": 122000.0,
+   "score": 4.44,
+   "notes": [],
+   "key": "affirm|senior software engineer back end fraud"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Render Engineer: Rendering / Metal / DirectX / OpenGL / FFmpeg",
+   "company": "Renewed Vision",
+   "url": "https://himalayas.app/companies/renewed-vision/jobs/senior-render-engineer-rendering-metal-directx-opengl-ffmpeg-6958536183",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Graphics-Programming",
+    "Video-Engineering",
+    "Render-Engineer",
+    "Software-Engineer",
+    "C++-Programming",
+    "Senior-Graphics-Engineer",
+    "Senior-Graphics-Software-Engineer",
+    "Senior-Game-Engine-Developer",
+    "Game-Rendering-Engineer",
+    "Senior-GPU-Backend-Engineer",
+    "Rendering-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-08-21T22:26:38+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "renewed vision|senior render engineer rendering metal directx opengl ffmpeg"
+  },
+  {
+   "source": "himalayas",
+   "title": "Embedded System Architect – IoT Connectivity",
+   "company": "Scalian",
+   "url": "https://himalayas.app/companies/scalian/jobs/embedded-system-architect-iot-connectivity",
+   "location": "Spain",
+   "remote": true,
+   "regions": [
+    "Spain"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "IoT-Architecture",
+    "Embedded-Systems-Engineering",
+    "IoT-Connectivity",
+    "Wireless-Systems-Engineering",
+    "Technology-Leadership",
+    "Embedded-Systems-Architect",
+    "IoT-Solutions-Architect",
+    "Principal-IoT-Systems-Engineer",
+    "IoT-Architect",
+    "Industrial-IoT-Architect",
+    "System-Architect"
+   ],
+   "seniority": [
+    "Senior",
+    "Director"
+   ],
+   "posted": "2026-10-03T00:46:39+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "scalian|embedded system architect iot connectivity"
+  },
+  {
+   "source": "himalayas",
+   "title": "Firmware Engineer",
+   "company": "TechBiz Global",
+   "url": "https://himalayas.app/companies/techbiz-global/jobs/firmware-engineer-1513612674",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Firmware-Engineering",
+    "Embedded-Systems",
+    "Embedded-Software-Engineering",
+    "Semiconductor-Industry",
+    "Engineering",
+    "Firmware-Engineer",
+    "Embedded-Firmware-Engineer",
+    "Hardware-Firmware-Engineer",
+    "Senior-Firmware-Engineer",
+    "Firmware-Developer",
+    "Firmware-Integration-Engineer",
+    "Staff-Firmware-Engineer",
+    "Embedded-Firmware-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-16T21:37:07+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "techbiz global|firmware engineer"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior React Full-stack Developer",
+   "company": "Lemon.io",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-react-full-stack-developer-2091133",
+   "location": "Europe, USA, Canada, APAC",
+   "remote": true,
+   "regions": [
+    "Europe",
+    "USA",
+    "Canada",
+    "APAC"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    ".Net",
+    "android",
+    "AWS",
+    "azure",
+    "C",
+    "C#",
+    "C++",
+    "data science",
+    "fullstack",
+    "golang",
+    "ios",
+    "java",
+    "javascript",
+    "node.js",
+    "php",
+    "python",
+    "react",
+    "react js",
+    "ruby/rails",
+    "scala",
+    "shopify",
+    "swift",
+    "UI/UX",
+    "wordpress",
+    "blockchain",
+    "AI/ML",
+    "automation",
+    "react native",
+    "rust",
+    "product management",
+    "unity",
+    "electron",
+    "spring",
+    "data analysis",
+    "laravel",
+    "Ethereum",
+    "graphic design",
+    "Typescript ",
+    "angular ",
+    "GCP",
+    "firebase",
+    "data engineering",
+    "Site Reliability",
+    "Symfony",
+    "startup",
+    "marketplace",
+    "next.js",
+    "flutter"
+   ],
+   "seniority": [],
+   "posted": "2026-10-02T13:30:06+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lemon.io|senior react full stack developer"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior back-end Engineer",
+   "company": "Lemon.io",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-back-end-engineer-2091132",
+   "location": "Europe, USA, UK, Canada, Australia, Ireland, Switzerland, Singapore, Mexico, Iceland, Norway",
+   "remote": true,
+   "regions": [
+    "Europe",
+    "USA",
+    "UK",
+    "Canada",
+    "Australia",
+    "Ireland",
+    "Switzerland",
+    "Singapore",
+    "Mexico",
+    "Iceland",
+    "Norway"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    ".Net",
+    "android",
+    "C",
+    "C#",
+    "C++",
+    "data science",
+    "golang",
+    "ios",
+    "java",
+    "javascript",
+    "kubernetes",
+    "node.js",
+    "php",
+    "python",
+    "react",
+    "ruby/rails",
+    "scala",
+    "shopify",
+    "swift",
+    "UI/UX",
+    "wordpress",
+    "blockchain",
+    "AI/ML",
+    "automation",
+    "project management",
+    "react native",
+    "research",
+    "rust",
+    "unity",
+    "electron",
+    "spring",
+    "laravel",
+    "Ethereum",
+    "graphic design",
+    "Typescript ",
+    "hardware",
+    "angular ",
+    "firebase",
+    "data engineering",
+    "Site Reliability",
+    "Symfony",
+    "next.js",
+    "infrastructure",
+    "flutter"
+   ],
+   "seniority": [],
+   "posted": "2026-09-30T13:15:26+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lemon.io|senior back end engineer"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior AI Engineer",
+   "company": "Lemon.io",
+   "url": "https://remotive.com/remote-jobs/artificial-intelligence/senior-ai-engineer-2091131",
+   "location": "Northern America, LATAM, Europe, APAC",
+   "remote": true,
+   "regions": [
+    "Northern America",
+    "LATAM",
+    "Europe",
+    "APAC"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    ".Net",
+    "android",
+    "C",
+    "C#",
+    "C++",
+    "data science",
+    "golang",
+    "ios",
+    "java",
+    "javascript",
+    "node.js",
+    "php",
+    "python",
+    "react",
+    "ruby/rails",
+    "scala",
+    "shopify",
+    "swift",
+    "UI/UX",
+    "wordpress",
+    "blockchain",
+    "AI/ML",
+    "automation",
+    "project management",
+    "react native",
+    "rust",
+    "unity",
+    "electron",
+    "spring",
+    "laravel",
+    "Ethereum",
+    "graphic design",
+    "Typescript ",
+    "angular ",
+    "firebase",
+    "data engineering",
+    "Site Reliability",
+    "SOLID",
+    "Symfony",
+    "startup",
+    "marketplace",
+    "next.js",
+    "flutter"
+   ],
+   "seniority": [],
+   "posted": "2026-09-18T12:23:56+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lemon.io|senior ai engineer"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior .NET Full-stack Developer",
+   "company": "Lemon.io",
+   "url": "https://remotive.com/remote-jobs/software-development/senior-net-full-stack-developer-2091130",
+   "location": "Northern America, LATAM, Europe, APAC",
+   "remote": true,
+   "regions": [
+    "Northern America",
+    "LATAM",
+    "Europe",
+    "APAC"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    ".Net",
+    "android",
+    "C",
+    "C#",
+    "C++",
+    "data science",
+    "fullstack",
+    "golang",
+    "ios",
+    "java",
+    "javascript",
+    "node.js",
+    "php",
+    "python",
+    "react",
+    "ruby/rails",
+    "scala",
+    "shopify",
+    "swift",
+    "UI/UX",
+    "wordpress",
+    "blockchain",
+    "AI/ML",
+    "automation",
+    "project management",
+    "react native",
+    "rust",
+    "unity",
+    "electron",
+    "spring",
+    "laravel",
+    "Ethereum",
+    "graphic design",
+    "Typescript ",
+    "angular ",
+    "firebase",
+    "data engineering",
+    "Site Reliability",
+    "Symfony",
+    "startup",
+    "marketplace",
+    "next.js",
+    "flutter"
+   ],
+   "seniority": [],
+   "posted": "2026-09-17T13:22:05+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lemon.io|senior net full stack developer"
+  },
+  {
+   "source": "remotive",
+   "title": "Senior Data Scientist",
+   "company": "Lemon.io",
+   "url": "https://remotive.com/remote-jobs/data/senior-data-scientist-2091129",
+   "location": "Northern America, LATAM, Europe, APAC",
+   "remote": true,
+   "regions": [
+    "Northern America",
+    "LATAM",
+    "Europe",
+    "APAC"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    ".Net",
+    "android",
+    "C",
+    "C#",
+    "C++",
+    "golang",
+    "ios",
+    "java",
+    "javascript",
+    "node.js",
+    "php",
+    "python",
+    "react",
+    "ruby/rails",
+    "scala",
+    "shopify",
+    "swift",
+    "UI/UX",
+    "wordpress",
+    "blockchain",
+    "AI/ML",
+    "automation",
+    "project management",
+    "react native",
+    "rust",
+    "product management",
+    "unity",
+    "electron",
+    "spring",
+    "data analysis",
+    "laravel",
+    "Ethereum",
+    "graphic design",
+    "Typescript ",
+    "angular ",
+    "firebase",
+    "data engineering",
+    "Site Reliability",
+    "Symfony",
+    "startup",
+    "marketplace",
+    "next.js",
+    "flutter"
+   ],
+   "seniority": [],
+   "posted": "2026-09-16T12:35:28+00:00",
+   "salary_eur_max": null,
+   "score": 4.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lemon.io|senior data scientist"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer - iGaming",
+   "company": "Recruiter4you",
+   "url": "https://himalayas.app/companies/recruiter4you/jobs/senior-software-engineer-igaming",
+   "location": "Albania, Bulgaria, Cyprus, Estonia, Georgia, Malta, North Macedonia, Portugal, Romania, Serbia, South Africa, Spain",
+   "remote": true,
+   "regions": [
+    "Albania",
+    "Bulgaria",
+    "Cyprus",
+    "Estonia",
+    "Georgia",
+    "Malta",
+    "North Macedonia",
+    "Portugal",
+    "Romania",
+    "Serbia",
+    "South Africa",
+    "Spain"
+   ],
+   "salary_min": 5000.0,
+   "salary_max": 6900.0,
+   "currency": "EUR",
+   "salary_period": "month",
+   "tags": [
+    "Software-Engineer",
+    "Backend-Engineer",
+    "Systems-Engineer",
+    "IGaming-Engineering",
+    "Senior-Software-Engineer-Gaming",
+    "Software-Engineer-(Game)"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-03T07:07:17+00:00",
+   "salary_eur_max": 82800.0,
+   "score": 3.66,
+   "notes": [],
+   "key": "recruiter4you|senior software engineer igaming"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer - Talent Pipeline",
+   "company": "Forgotten Empires",
+   "url": "https://himalayas.app/companies/forgotten-empires/jobs/senior-software-engineer-talent-pipeline-7429667969",
+   "location": "Spain",
+   "remote": true,
+   "regions": [
+    "Spain"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Game-Development",
+    "Game-Engineering",
+    "C++-Programming",
+    "Video-Game-Development",
+    "Gameplay-Programming",
+    "Senior-Software-Engineer-Jobs",
+    "Technology-Talent-Pipeline",
+    "Senior-Software-Developer-Positions",
+    "Senior-Software-Development",
+    "Senior-Engineering-Roles",
+    "Senior-Software-Development-Jobs",
+    "Senior-Software-Development-Openings",
+    "Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-11T02:08:33+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "forgotten empires|senior software engineer talent pipeline"
+  },
+  {
+   "source": "himalayas",
+   "title": "Compiler Developer (LLVM, C++)",
+   "company": "Access Softek",
+   "url": "https://himalayas.app/companies/access-softek/jobs/compiler-developer-llvm-c-7427707376",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Compiler-Engineering",
+    "C++-Developer",
+    "Systems-Software-Engineer",
+    "Software-Engineer",
+    "Compiler-Developer",
+    "Compiler-Engineer",
+    "Compiler-Optimization-Engineer",
+    "LLVM-Development"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-18T21:28:48+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "access softek|compiler developer llvm c++"
+  },
+  {
+   "source": "himalayas",
+   "title": "Principal C++ Engineer",
+   "company": "Private Identity",
+   "url": "https://himalayas.app/companies/private-identity/jobs/principal-c-engineer",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "C++-Engineering",
+    "Principal-Engineer",
+    "Backend-Engineering",
+    "Software-Engineer",
+    "Systems-Engineering",
+    "Principal-C++-Software-Engineer",
+    "Principal-Software-Engineer",
+    "Staff-C++-Software-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-02T08:38:04+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "private identity|principal c++ engineer"
+  },
+  {
+   "source": "himalayas",
+   "title": "AI Inference Engineer QVAC (100% remote Worldwide)",
+   "company": "Tether Operations Limited",
+   "url": "https://himalayas.app/companies/tether-operations-limited/jobs/ai-inference-engineer-qvac-100-remote-worldwide-8841435058",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "AI-Engineering",
+    "Machine-Learning-Engineering",
+    "Software-Engineer",
+    "C++-Programming",
+    "Edge-AI",
+    "AI-Inference-Engineer",
+    "Remote-Senior-AI-Engineer",
+    "Senior-AI-Inference-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-15T22:47:21+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "tether operations limited|ai inference engineer qvac 100 remote worldwide"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer (YDB Team)",
+   "company": "Nebius",
+   "url": "https://himalayas.app/companies/nebius/jobs/senior-software-engineer-ydb-team-5851203954",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Backend-Engineer",
+    "Systems-Engineer",
+    "C++-Developer",
+    "Distributed-Systems-Engineer",
+    "Senior-Database-Engineer",
+    "Senior-Database-Engineering",
+    "Senior-Systems-Software-Engineer",
+    "Senior-Software-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-09T01:34:17+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "nebius|senior software engineer ydb team"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Full-Stack Engineer",
+   "company": "Private Identity",
+   "url": "https://himalayas.app/companies/private-identity/jobs/senior-full-stack-engineer",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Engineering",
+    "C++-Programming",
+    "Software-Engineer",
+    "Backend-Development",
+    "Systems-Engineering",
+    "Security-Engineering",
+    "Full-Stack-Engineer",
+    "Senior-Full-Stack-Engineering",
+    "Senior-Fullstack-Developer",
+    "Senior-Full-Stack-Development",
+    "¿Senior-Fullstack-Engineering",
+    "Senior-Full-Stack-Engineer-(React-Node.Js)",
+    "Senior-Fullstack-+-DevOps-Engineer",
+    "Senior-Frontend-Full-Stack-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-02T07:56:56+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "private identity|senior full stack engineer"
+  },
+  {
+   "source": "jobicy",
+   "title": "Senior C++ Engineer",
+   "company": "Findev",
+   "url": "https://jobicy.com/jobs/155221-senior-c-engineer",
+   "location": "Cyprus,  Poland,  Portugal,  Spain",
+   "remote": true,
+   "regions": [
+    "Cyprus",
+    "Poland",
+    "Portugal",
+    "Spain"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software Engineering",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-13T15:49:04+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "findev|senior c++ engineer"
+  },
+  {
+   "source": "arbeitnow",
+   "title": "Senior C++ Engineer",
+   "company": "Duck Duck Go",
+   "url": "https://www.arbeitnow.com/jobs/companies/duck-duck-go/remote-senior-c-engineer-298192",
+   "location": "Remote",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Engineering",
+    "Full Time"
+   ],
+   "seniority": [],
+   "posted": "2026-10-14T14:40:23+00:00",
+   "salary_eur_max": null,
+   "score": 3.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "duck duck go|senior c++ engineer"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer",
+   "company": "TechBiz Global",
+   "url": "https://himalayas.app/companies/techbiz-global/jobs/senior-software-engineer-6577530052",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "AI-Engineering",
+    "Machine-Learning",
+    "Mobile-Development",
+    "Software-Architecture",
+    "Senior-Software-Developer",
+    "Senior-Software-Engineer-Jobs",
+    "Senior-Engineer",
+    "Senior-Lead-Software-Developer",
+    "Senior-C#-.NET-Software-Engineer",
+    "Senior-Java-Software-Engineer",
+    "Senior-Systems-Software-Engineer",
+    "Senior-Software-Engineer-C++",
+    "Full-Stack-Engineer",
+    "Senior-App-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-09T11:53:01+00:00",
+   "salary_eur_max": null,
+   "score": 3.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "techbiz global|senior software engineer"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Angular Full-stack Developer",
+   "company": "Lemon.io",
+   "url": "https://weworkremotely.com/remote-jobs/lemon-io-senior-angular-full-stack-developer",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World",
+    "🇦🇩 Andorra",
+    "🇦🇱 Albania",
+    "🇦🇷 Argentina",
+    "🇦🇹 Austria",
+    "🇦🇺 Australia",
+    "🇧🇦 Bosnia and Herzegovina",
+    "🇧🇪 Belgium",
+    "🇧🇬 Bulgaria",
+    "🇧🇴 Bolivia (Plurinational State of)",
+    "🇧🇷 Brazil",
+    "🇧🇿 Belize",
+    "🇨🇦 Canada",
+    "🇨🇭 Switzerland",
+    "🇨🇱 Chile",
+    "🇨🇴 Colombia",
+    "🇨🇷 Costa Rica",
+    "🇨🇾 Cyprus",
+    "🇨🇿 Czechia",
+    "🇩🇪 Germany",
+    "🇩🇰 Denmark",
+    "🇩🇴 Dominican Republic",
+    "🇪🇨 Ecuador",
+    "🇪🇪 Estonia",
+    "🇪🇸 Spain",
+    "🇫🇮 Finland",
+    "🇫🇷 France",
+    "🇬🇧 United Kingdom of Great Britain and Northern Ireland",
+    "🇬🇷 Greece",
+    "🇬🇹 Guatemala",
+    "🇭🇳 Honduras",
+    "🇭🇷 Croatia",
+    "🇭🇹 Haiti",
+    "🇮🇩 Indonesia",
+    "🇮🇪 Ireland",
+    "🇮🇱 Israel",
+    "🇮🇹 Italy",
+    "🇯🇲 Jamaica",
+    "🇯🇵 Japan",
+    "🇰🇷 Korea (Republic of)",
+    "🇱🇹 Lithuania",
+    "🇱🇺 Luxembourg",
+    "🇱🇻 Latvia",
+    "🇲🇦 Morocco",
+    "🇲🇩 Moldova (Republic of)",
+    "🇲🇪 Montenegro",
+    "🇲🇰 North Macedonia",
+    "🇲🇹 Malta",
+    "🇲🇽 Mexico",
+    "🇲🇾 Malaysia",
+    "🇳🇱 Netherlands",
+    "🇳🇴 Norway",
+    "🇳🇿 New Zealand",
+    "🇵🇦 Panama",
+    "🇵🇪 Peru",
+    "🇵🇬 Papua New Guinea",
+    "🇵🇭 Philippines",
+    "🇵🇱 Poland",
+    "🇵🇷 Puerto Rico",
+    "🇵🇹 Portugal",
+    "🇵🇾 Paraguay",
+    "🇷🇴 Romania",
+    "🇸🇪 Sweden",
+    "🇸🇬 Singapore",
+    "🇸🇮 Slovenia",
+    "🇸🇰 Slovakia",
+    "🇸🇻 El Salvador",
+    "🇹🇭 Thailand",
+    "🇺🇦 Ukraine",
+    "🇺🇸 United States of America",
+    "🇺🇾 Uruguay",
+    "🇻🇳 Viet Nam",
+    "and 🇿🇦 South Africa"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "AngularJS",
+    "AWS",
+    "Azure",
+    "Node.js",
+    "PHP",
+    "Engineer",
+    "Developer",
+    "Full Stack Dev",
+    "Full Time",
+    "English",
+    "Laravel",
+    "GCP",
+    "and TypeScript",
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-10-06T13:25:57+00:00",
+   "salary_eur_max": null,
+   "score": 2.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lemon.io|senior angular full stack developer"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Node.js Software Engineer - Holepunch (100% Remote, Worldwide)",
+   "company": "Tether Operations Limited",
+   "url": "https://himalayas.app/companies/tether-operations-limited/jobs/senior-node-js-software-engineer-holepunch-100-remote-worldwide",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Engineering",
+    "Node.Js-Development",
+    "Software-Engineer",
+    "P2P-Networking",
+    "Backend-Development",
+    "Senior-Node.Js-Engineer",
+    "Senior-Node.Js-Developer",
+    "Remote-Senior-Backend-Engineer",
+    "Node.Js-Engineer",
+    "Remote-Senior-Distributed-Systems-Engineer",
+    "Software-Architect-(Node.Js)",
+    "Remote-Senior-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-29T20:32:12+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "tether operations limited|senior node js software engineer holepunch 100 remote worldwide"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior/Staff/Principal Engineer",
+   "company": "Canonical",
+   "url": "https://himalayas.app/companies/canonical/jobs/senior-staff-principal-engineer",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Staff-Engineer",
+    "Principal-Engineer",
+    "Systems-Engineer",
+    "Backend-Engineer",
+    "Senior-Staff-Engineer",
+    "Senior-Staff-Engineering",
+    "Senior-Principal-Engineer",
+    "Senior-Engineer",
+    "Senior-Lead-Engineer",
+    "Senior-Engineering-Roles",
+    "Senior-Engineering-Jobs",
+    "Senior-Engineering"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-19T04:18:56+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "canonical|senior staff principal engineer"
+  },
+  {
+   "source": "remoteok",
+   "title": "Senior Backend Engineer Build AI Agents",
+   "company": "Salesforge",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-backend-engineer-build-ai-agents-salesforge-1137114",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "golang",
+    "senior",
+    "sales",
+    "engineer",
+    "backend"
+   ],
+   "seniority": [],
+   "posted": "2026-08-25T07:00:03+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "salesforge|senior backend engineer build ai agents"
+  },
+  {
+   "source": "jobicy",
+   "title": "Senior Backend Engineer (Boosters)",
+   "company": "Playson",
+   "url": "https://jobicy.com/jobs/153227-senior-backend-engineer-boosters",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software Engineering",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-15T03:40:09+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "playson|senior backend engineer boosters"
+  },
+  {
+   "source": "jobicy",
+   "title": "Senior System Engineer (Virtual Private Cloud Team)",
+   "company": "Nebius",
+   "url": "https://jobicy.com/jobs/150590-senior-system-engineer-virtual-private-cloud-team",
+   "location": "Europe,  Netherlands",
+   "remote": true,
+   "regions": [
+    "Europe",
+    "Netherlands"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "DevOps & Infrastructure",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-15T02:50:08+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "nebius|senior system engineer virtual private cloud team"
+  },
+  {
+   "source": "jobicy",
+   "title": "Senior Software Engineer (Game Engine)",
+   "company": "Playson",
+   "url": "https://jobicy.com/jobs/146058-senior-software-engineer-game-engine",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software Engineering",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-15T02:45:11+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "playson|senior software engineer game engine"
+  },
+  {
+   "source": "jobicy",
+   "title": "Staff Research Engineer - Interactive Avatars",
+   "company": "Synthesia",
+   "url": "https://jobicy.com/jobs/152977-staff-research-engineer-interactive-avatars",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Data Science & Analytics",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-11T03:55:10+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "synthesia|staff research engineer interactive avatars"
+  },
+  {
+   "source": "arbeitnow",
+   "title": "Lead Java Developer/Solution Architect (6-month contract)",
+   "company": "gravity9",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/gravity9/remote-lead-java-developer-solution-architect-6-month-contract-london-346117",
+   "location": "Remote job",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Remote",
+    "Experienced",
+    "fulltime permanent"
+   ],
+   "seniority": [],
+   "posted": "2026-10-14T20:32:27+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "gravity9|lead java developer solution architect 6 month contract"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Principal Software Engineer, AI",
+   "company": "Salesloft",
+   "url": "https://weworkremotely.com/remote-jobs/salesloft-principal-software-engineer-ai",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World",
+    "🇺🇸 United States of America"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-09-30T07:31:24+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "salesloft|principal software engineer ai"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Staff Software Engineer - Query Execution",
+   "company": "Dremio",
+   "url": "https://weworkremotely.com/remote-jobs/dremio-senior-staff-software-engineer-query-execution",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-09-28T07:31:05+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "dremio|senior staff software engineer query execution"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Independent Software Developer ($90-$170/hr)",
+   "company": "A.Team",
+   "url": "https://weworkremotely.com/remote-jobs/a-team-senior-independent-software-developer-90-170-hr",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2024-06-16T17:30:51+00:00",
+   "salary_eur_max": null,
+   "score": 1.5,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "a.team|senior independent software developer 90 170 hr"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer - Python/Golang - Kubernetes",
+   "company": "Canonical",
+   "url": "https://himalayas.app/companies/canonical/jobs/senior-software-engineer-python-golang-kubernetes",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Cloud-Engineer",
+    "Kubernetes",
+    "DevOps",
+    "Backend-Development",
+    "Senior-Kubernetes-Engineer",
+    "Senior-Python-Software-Engineer",
+    "Senior-Golang-Software-Engineer",
+    "Senior-Python-Engineer",
+    "Senior-Golang-Developer",
+    "Senior-Cloud-Software-Engineer",
+    "Senior-Python-Backend-Developer",
+    "Python-Developer",
+    "Senior-Go-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-02T23:20:10+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "canonical|senior software engineer python golang kubernetes"
+  },
+  {
+   "source": "himalayas",
+   "title": "Business Title IT Dev Senior (Software Engineer) - Contractor",
+   "company": "Corpay",
+   "url": "https://himalayas.app/companies/corpay/jobs/business-title-it-dev-senior-software-engineer-contractor",
+   "location": "Albania, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Lithuania, Luxembourg, Malta, Moldova, Montenegro, Netherlands, North Macedonia, Norway, Poland, Portugal, Romania, Russian Federation, Serbia, Slovakia, Spain, Sweden, Switzerland, Ukraine, United Kingdom",
+   "remote": true,
+   "regions": [
+    "Albania",
+    "Austria",
+    "Belarus",
+    "Belgium",
+    "Bosnia and Herzegovina",
+    "Bulgaria",
+    "Croatia",
+    "Cyprus",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Ireland",
+    "Italy",
+    "Kosovo",
+    "Latvia",
+    "Lithuania",
+    "Luxembourg",
+    "Malta",
+    "Moldova",
+    "Montenegro",
+    "Netherlands",
+    "North Macedonia",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Romania",
+    "Russian Federation",
+    "Serbia",
+    "Slovakia",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "Ukraine",
+    "United Kingdom"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Development",
+    "IT-Support",
+    "Technical-Support",
+    "Contract-Software-Engineering",
+    "Senior-Software-Developer",
+    "Contract-Software-Developer",
+    "Software-Engineering-Contractor",
+    "Contract-Software-Engineer",
+    "Software-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-20T20:31:34+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "corpay|business title it dev senior software engineer contractor"
+  },
+  {
+   "source": "himalayas",
+   "title": "IT Dev Senior (Software Engineer) - Contractor",
+   "company": "Corpay",
+   "url": "https://himalayas.app/companies/corpay/jobs/it-dev-senior-software-engineer-contractor",
+   "location": "Albania, Austria, Belarus, Belgium, Bosnia and Herzegovina, Bulgaria, Croatia, Cyprus, Czechia, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy, Kosovo, Latvia, Lithuania, Luxembourg, Malta, Moldova, Montenegro, Netherlands, North Macedonia, Norway, Poland, Portugal, Romania, Russian Federation, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United Kingdom",
+   "remote": true,
+   "regions": [
+    "Albania",
+    "Austria",
+    "Belarus",
+    "Belgium",
+    "Bosnia and Herzegovina",
+    "Bulgaria",
+    "Croatia",
+    "Cyprus",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Ireland",
+    "Italy",
+    "Kosovo",
+    "Latvia",
+    "Lithuania",
+    "Luxembourg",
+    "Malta",
+    "Moldova",
+    "Montenegro",
+    "Netherlands",
+    "North Macedonia",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Romania",
+    "Russian Federation",
+    "Serbia",
+    "Slovakia",
+    "Slovenia",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "Ukraine",
+    "United Kingdom"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Development",
+    "Technical-Support",
+    "IT-Contracting",
+    "Software-Engineer",
+    "Senior-Software-Developer",
+    "Senior-Software-Development",
+    "Contract-Software-Engineer",
+    "Senior-Software-Development-Jobs"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-21T20:32:40+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "corpay|it dev senior software engineer contractor"
+  },
+  {
+   "source": "himalayas",
+   "title": "Lead Golang Software Engineer, Commercial Systems",
+   "company": "Canonical",
+   "url": "https://himalayas.app/companies/canonical/jobs/lead-golang-software-engineer-commercial-systems",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Golang-Development",
+    "Backend-Development",
+    "Information-Systems",
+    "Senior-Golang-Software-Engineer",
+    "Senior-Golang-Tech-Lead",
+    "Senior-Golang-Developer",
+    "Senior-Go-Developer",
+    "Senior-Systems-Software-Engineer",
+    "Senior-Golang-Architect"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-08-19T16:18:15+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "canonical|lead golang software engineer commercial systems"
+  },
+  {
+   "source": "himalayas",
+   "title": "Lead Python Software Engineer, Commercial Systems",
+   "company": "Canonical",
+   "url": "https://himalayas.app/companies/canonical/jobs/lead-python-software-engineer-commercial-systems",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Python-Development",
+    "Data-Engineering",
+    "Backend-Development",
+    "ETL-Development",
+    "Integration-Engineering",
+    "Python-Software-Engineering",
+    "Lead-Software-Engineer-Python",
+    "Senior-Python-Software-Engineer",
+    "Lead-Python-Developer",
+    "Senior-Python-Engineer",
+    "Python-Software-Engineer",
+    "Python-Developer",
+    "Python-Systems-Developer",
+    "Senior-Systems-Software-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-19T09:15:59+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "canonical|lead python software engineer commercial systems"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer - REDAPL Graph Engine",
+   "company": "Datadog",
+   "url": "https://himalayas.app/companies/datadog/jobs/senior-software-engineer-redapl-graph-engine",
+   "location": "France, Germany, Italy, Spain, Switzerland, United Kingdom",
+   "remote": true,
+   "regions": [
+    "France",
+    "Germany",
+    "Italy",
+    "Spain",
+    "Switzerland",
+    "United Kingdom"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Backend-Engineering",
+    "Platform-Engineering",
+    "Graph-Database-Engineering",
+    "Infrastructure-Engineering",
+    "Graph-Engineer",
+    "Senior-Engine-Software-Engineer",
+    "Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-03T20:10:04+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "datadog|senior software engineer redapl graph engine"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer (Backend)",
+   "company": "Canonical",
+   "url": "https://himalayas.app/companies/canonical/jobs/senior-software-engineer-backend",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Backend-Development",
+    "Software-Engineer",
+    "Python-Development",
+    "SaaS-Engineering",
+    "Linux-Engineering",
+    "Open-Source-Development",
+    "Platform-Engineering",
+    "Senior-Backend-Engineering",
+    "Senior-Backend-Development",
+    "Senior-Backend-Engineer-(Java-Kotlin)",
+    "Senior-Java-Backend-Engineer",
+    "Senior-Java-Backend-Developer",
+    "Senior-Backend-Developer-(Java-Spring-AWS)",
+    "Senior-Backend-Engineer-(Fintech)",
+    "Remote-Senior-Backend-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-19T22:18:33+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "canonical|senior software engineer backend"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer (Live Debugger for the JVM)",
+   "company": "JetBrains",
+   "url": "https://himalayas.app/companies/jetbrains/jobs/senior-software-engineer-live-debugger-for-the-jvm",
+   "location": "Armenia, Cyprus, Czechia, Germany, Netherlands, Poland, Serbia, Spain, United Kingdom",
+   "remote": true,
+   "regions": [
+    "Armenia",
+    "Cyprus",
+    "Czechia",
+    "Germany",
+    "Netherlands",
+    "Poland",
+    "Serbia",
+    "Spain",
+    "United Kingdom"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Backend-Development",
+    "Developer-Tools",
+    "JVM-Development",
+    "Debugging-en-vivo",
+    "Senior-Java-Software-Engineer",
+    "Senior-Java-Engineer",
+    "Senior-Developer-Tools-Engineer",
+    "Software-Engineer",
+    "Java-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-02T04:27:32+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "jetbrains|senior software engineer live debugger for the jvm"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer, Remote",
+   "company": "Xperteez Technology",
+   "url": "https://himalayas.app/companies/xperteez-technology/jobs/senior-software-engineer-remote",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": "USD",
+   "salary_period": "hour",
+   "tags": [
+    "Software-Engineer",
+    "Backend-Engineer",
+    "Full-Stack-Engineer",
+    "AI-Evaluation-Engineer",
+    "Remote-Senior-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-09T00:00:22+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "xperteez technology|senior software engineer remote"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Software Engineer, (OpenAI Codex, Claude Code or Cursor)",
+   "company": "G2i",
+   "url": "https://himalayas.app/companies/g2i/jobs/senior-software-engineer-openai-codex-claude-code-or-cursor",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": "USD",
+   "salary_period": "hour",
+   "tags": [
+    "Senior-AI-Software-Engineer",
+    "Senior-Software-AI-Engineer",
+    "Senior-AI-Software-Developer",
+    "Senior-Python-Software-Engineer",
+    "Software-Engineer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-01T12:26:32+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "g2i|senior software engineer openai codex claude code or cursor"
+  },
+  {
+   "source": "himalayas",
+   "title": "Senior Backend Software Engineer",
+   "company": "Amplemarket",
+   "url": "https://himalayas.app/companies/amplemarket/jobs/senior-backend-software-engineer",
+   "location": "Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antarctica, Antigua and Barbuda, Argentina, Armenia, Aruba, Austria, Azerbaijan, Bahamas, Bahrain, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bolivia, Bonaire, Sint Eustatius and Saba, Bosnia and Herzegovina, Botswana, Bouvet Island, Brazil, Bulgaria, Burkina Faso, Burundi, Cabo Verde, Cameroon, Cayman Islands, Central African Republic, Chad, Chile, Colombia, Comoros, Congo, Congo, The Democratic Republic of the, Cook Islands, Costa Rica, Croatia, Cuba, Curaçao, Cyprus, Czechia, Côte d'Ivoire, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Eswatini, Ethiopia, Falkland Islands (Malvinas), Faroe Islands, Finland, France, French Guiana, French Southern Territories, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Heard Island and McDonald Islands, Holy See (Vatican City State), Honduras, Hungary, Iceland, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Jersey, Jordan, Kazakhstan, Kenya, Kosovo, Kuwait, Kyrgyzstan, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Madagascar, Malawi, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Moldova, Monaco, Montenegro, Montserrat, Morocco, Mozambique, Namibia, Netherlands, Nicaragua, Niger, Nigeria, North Macedonia, Norway, Oman, Palestine, State of, Panama, Paraguay, Peru, Poland, Portugal, Puerto Rico, Qatar, Romania, Russian Federation, Rwanda, Réunion, Saint Barthélemy, Saint Helena, Ascension and Tristan da Cunha, Saint Kitts and Nevis, Saint Lucia, Saint Martin (French part), Saint Pierre and Miquelon, Saint Vincent and the Grenadines, San Marino, Sao Tome and Principe, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Sint Maarten (Dutch part), Slovakia, Slovenia, Somalia, South Africa, South Georgia and the South Sandwich Islands, South Sudan, Spain, Sudan, Suriname, Svalbard and Jan Mayen, Sweden, Switzerland, Syrian Arab Republic, Tajikistan, Tanzania, Togo, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Turks and Caicos Islands, Uganda, Ukraine, United Arab Emirates, United Kingdom, Uruguay, Uzbekistan, Venezuela, Virgin Islands, British, Virgin Islands, U.S., Western Sahara, Yemen, Zambia, Zimbabwe, Åland Islands",
+   "remote": true,
+   "regions": [
+    "Afghanistan",
+    "Albania",
+    "Algeria",
+    "Andorra",
+    "Angola",
+    "Anguilla",
+    "Antarctica",
+    "Antigua and Barbuda",
+    "Argentina",
+    "Armenia",
+    "Aruba",
+    "Austria",
+    "Azerbaijan",
+    "Bahamas",
+    "Bahrain",
+    "Barbados",
+    "Belarus",
+    "Belgium",
+    "Belize",
+    "Benin",
+    "Bermuda",
+    "Bolivia",
+    "Bonaire, Sint Eustatius and Saba",
+    "Bosnia and Herzegovina",
+    "Botswana",
+    "Bouvet Island",
+    "Brazil",
+    "Bulgaria",
+    "Burkina Faso",
+    "Burundi",
+    "Cabo Verde",
+    "Cameroon",
+    "Cayman Islands",
+    "Central African Republic",
+    "Chad",
+    "Chile",
+    "Colombia",
+    "Comoros",
+    "Congo",
+    "Congo, The Democratic Republic of the",
+    "Cook Islands",
+    "Costa Rica",
+    "Croatia",
+    "Cuba",
+    "Curaçao",
+    "Cyprus",
+    "Czechia",
+    "Côte d'Ivoire",
+    "Denmark",
+    "Djibouti",
+    "Dominica",
+    "Dominican Republic",
+    "Ecuador",
+    "Egypt",
+    "El Salvador",
+    "Equatorial Guinea",
+    "Eritrea",
+    "Estonia",
+    "Eswatini",
+    "Ethiopia",
+    "Falkland Islands (Malvinas)",
+    "Faroe Islands",
+    "Finland",
+    "France",
+    "French Guiana",
+    "French Southern Territories",
+    "Gabon",
+    "Gambia",
+    "Georgia",
+    "Germany",
+    "Ghana",
+    "Gibraltar",
+    "Greece",
+    "Greenland",
+    "Grenada",
+    "Guadeloupe",
+    "Guatemala",
+    "Guernsey",
+    "Guinea",
+    "Guinea-Bissau",
+    "Guyana",
+    "Haiti",
+    "Heard Island and McDonald Islands",
+    "Holy See (Vatican City State)",
+    "Honduras",
+    "Hungary",
+    "Iceland",
+    "Iran",
+    "Iraq",
+    "Ireland",
+    "Isle of Man",
+    "Israel",
+    "Italy",
+    "Jamaica",
+    "Jersey",
+    "Jordan",
+    "Kazakhstan",
+    "Kenya",
+    "Kosovo",
+    "Kuwait",
+    "Kyrgyzstan",
+    "Latvia",
+    "Lebanon",
+    "Lesotho",
+    "Liberia",
+    "Libya",
+    "Liechtenstein",
+    "Lithuania",
+    "Luxembourg",
+    "Madagascar",
+    "Malawi",
+    "Mali",
+    "Malta",
+    "Martinique",
+    "Mauritania",
+    "Mauritius",
+    "Mayotte",
+    "Mexico",
+    "Moldova",
+    "Monaco",
+    "Montenegro",
+    "Montserrat",
+    "Morocco",
+    "Mozambique",
+    "Namibia",
+    "Netherlands",
+    "Nicaragua",
+    "Niger",
+    "Nigeria",
+    "North Macedonia",
+    "Norway",
+    "Oman",
+    "Palestine, State of",
+    "Panama",
+    "Paraguay",
+    "Peru",
+    "Poland",
+    "Portugal",
+    "Puerto Rico",
+    "Qatar",
+    "Romania",
+    "Russian Federation",
+    "Rwanda",
+    "Réunion",
+    "Saint Barthélemy",
+    "Saint Helena, Ascension and Tristan da Cunha",
+    "Saint Kitts and Nevis",
+    "Saint Lucia",
+    "Saint Martin (French part)",
+    "Saint Pierre and Miquelon",
+    "Saint Vincent and the Grenadines",
+    "San Marino",
+    "Sao Tome and Principe",
+    "Saudi Arabia",
+    "Senegal",
+    "Serbia",
+    "Seychelles",
+    "Sierra Leone",
+    "Sint Maarten (Dutch part)",
+    "Slovakia",
+    "Slovenia",
+    "Somalia",
+    "South Africa",
+    "South Georgia and the South Sandwich Islands",
+    "South Sudan",
+    "Spain",
+    "Sudan",
+    "Suriname",
+    "Svalbard and Jan Mayen",
+    "Sweden",
+    "Switzerland",
+    "Syrian Arab Republic",
+    "Tajikistan",
+    "Tanzania",
+    "Togo",
+    "Trinidad and Tobago",
+    "Tunisia",
+    "Turkey",
+    "Turkmenistan",
+    "Turks and Caicos Islands",
+    "Uganda",
+    "Ukraine",
+    "United Arab Emirates",
+    "United Kingdom",
+    "Uruguay",
+    "Uzbekistan",
+    "Venezuela",
+    "Virgin Islands, British",
+    "Virgin Islands, U.S.",
+    "Western Sahara",
+    "Yemen",
+    "Zambia",
+    "Zimbabwe",
+    "Åland Islands"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software-Engineer",
+    "Backend-Development",
+    "Backend-Engineer",
+    "API-Development",
+    "Senior-Backend-Engineering",
+    "Senior-Backend-Development",
+    "Senior-Java-Backend-Engineer",
+    "Senior-Backend-Engineer-(Java-Kotlin)",
+    "Remote-Senior-Backend-Engineer",
+    "Senior-Java-Backend-Developer"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-09-18T23:34:45+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "amplemarket|senior backend software engineer"
+  },
+  {
+   "source": "remoteok",
+   "title": "Senior .NET Software Engineer",
+   "company": "OkWhen",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-net-software-engineer-okwhen-1137411",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "dev",
+    "design",
+    "c sharp",
+    "saas",
+    "sys admin",
+    "infosec",
+    "education",
+    "technical",
+    "testing",
+    "web dev",
+    "xamarin",
+    "c",
+    "cloud",
+    "git",
+    "typescript",
+    "angular",
+    "mobile",
+    "exec",
+    "content writing",
+    "senior",
+    "ops",
+    "medical",
+    "engineer",
+    "backend",
+    "digital nomad"
+   ],
+   "seniority": [],
+   "posted": "2026-09-20T00:00:31+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "okwhen|senior net software engineer"
+  },
+  {
+   "source": "remoteok",
+   "title": "Senior Backend Engineer Studio AI",
+   "company": "Creative Fabrica",
+   "url": "https://remoteOK.com/remote-jobs/remote-senior-backend-engineer-studio-ai-creative-fabrica-1133667",
+   "location": "Anywhere",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "golang",
+    "technical",
+    "dev",
+    "senior",
+    "engineer",
+    "backend",
+    "digital nomad"
+   ],
+   "seniority": [],
+   "posted": "2026-06-18T17:00:02+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "creative fabrica|senior backend engineer studio ai"
+  },
+  {
+   "source": "jobicy",
+   "title": "Principal ML Platform Engineer",
+   "company": "Synthesia",
+   "url": "https://jobicy.com/jobs/153242-principal-ml-platform-engineer",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "DevOps & Infrastructure",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-15T02:50:20+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "synthesia|principal ml platform engineer"
+  },
+  {
+   "source": "jobicy",
+   "title": "Senior Integration Engineer",
+   "company": "Playson",
+   "url": "https://jobicy.com/jobs/153232-senior-integration-engineer",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Technical Support",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-15T02:50:15+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "playson|senior integration engineer"
+  },
+  {
+   "source": "jobicy",
+   "title": "Senior Software Engineer (Trust)",
+   "company": "Veriff",
+   "url": "https://jobicy.com/jobs/153163-senior-software-engineer-trust",
+   "location": "Estonia,  Spain",
+   "remote": true,
+   "regions": [
+    "Estonia",
+    "Spain"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software Engineering",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-14T02:27:12+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "veriff|senior software engineer trust"
+  },
+  {
+   "source": "jobicy",
+   "title": "Offensive Security Engineer",
+   "company": "Sporty Group",
+   "url": "https://jobicy.com/jobs/149060-offensive-security-engineer",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Cybersecurity",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-13T02:10:18+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "sporty group|offensive security engineer"
+  },
+  {
+   "source": "jobicy",
+   "title": "Product Engineering",
+   "company": "Polar",
+   "url": "https://jobicy.com/jobs/155050-product-engineering",
+   "location": "Europe,  USA",
+   "remote": true,
+   "regions": [
+    "Europe",
+    "USA"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software Engineering",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-11T08:39:48+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "polar|product engineering"
+  },
+  {
+   "source": "jobicy",
+   "title": "Platform Engineering",
+   "company": "Polar",
+   "url": "https://jobicy.com/jobs/155048-platform-engineering",
+   "location": "Europe,  USA",
+   "remote": true,
+   "regions": [
+    "Europe",
+    "USA"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "DevOps & Infrastructure",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-11T08:39:48+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "polar|platform engineering"
+  },
+  {
+   "source": "jobicy",
+   "title": "Staff Software Engineer - Data",
+   "company": "Dune",
+   "url": "https://jobicy.com/jobs/152919-staff-software-engineer-data",
+   "location": "Europe,  USA",
+   "remote": true,
+   "regions": [
+    "Europe",
+    "USA"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Software Engineering",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-10T03:23:28+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "dune|staff software engineer data"
+  },
+  {
+   "source": "jobicy",
+   "title": "Detection & Response Engineer",
+   "company": "Nebius",
+   "url": "https://jobicy.com/jobs/155169-detection-response-engineer",
+   "location": "Europe",
+   "remote": true,
+   "regions": [
+    "Europe"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Cybersecurity",
+    "Full-Time"
+   ],
+   "seniority": [
+    "Senior"
+   ],
+   "posted": "2026-10-13T09:38:20+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "nebius|detection response engineer"
+  },
+  {
+   "source": "arbeitnow",
+   "title": "Founding Engineer (Tech Lead) · Full-Stack, AI-native (m/w/d)",
+   "company": "Infinos GmbH",
+   "url": "https://www.arbeitnow.com/jobs/companies/infinos-gmbh/founding-engineer-tech-lead-full-stack-ai-native-berlin-106809",
+   "location": "Berlin",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Remote",
+    "Software Development",
+    "Unbefristeter arbeitsvertrag",
+    "teamleitung"
+   ],
+   "seniority": [],
+   "posted": "2026-10-15T10:01:33+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "infinos|founding engineer tech lead full stack ai native m w d"
+  },
+  {
+   "source": "arbeitnow",
+   "title": "Staff Site Reliability Engineer",
+   "company": "Adikteev",
+   "url": "https://www.arbeitnow.fr/jobs/companies/adikteev/remote-staff-site-reliability-engineer-paris-357394",
+   "location": "Remote job",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Engineering",
+    "Remote",
+    "Experienced",
+    "fulltime permanent"
+   ],
+   "seniority": [],
+   "posted": "2026-10-14T20:32:27+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "adikteev|staff site reliability engineer"
+  },
+  {
+   "source": "arbeitnow",
+   "title": "Senior Infrastructure & Cybersecurity Engineer (UK)",
+   "company": "A-Gas",
+   "url": "https://www.arbeitnow.co.uk/jobs/companies/a-gas/remote-senior-infrastructure-cybersecurity-engineer-uk-portishead-285835",
+   "location": "Remote job",
+   "remote": true,
+   "regions": [],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Business Infrastructure",
+    "Remote",
+    "Experienced",
+    "fulltime permanent"
+   ],
+   "seniority": [],
+   "posted": "2026-10-14T20:32:32+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "a-gas|senior infrastructure cybersecurity engineer uk"
+  },
+  {
+   "source": "weworkremotely-backend",
+   "title": "Senior Java Developer",
+   "company": "Twikey",
+   "url": "https://weworkremotely.com/remote-jobs/twikey-senior-java-developer",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World",
+    "🇦🇩 Andorra",
+    "🇦🇱 Albania",
+    "🇦🇹 Austria",
+    "🇧🇦 Bosnia and Herzegovina",
+    "🇧🇬 Bulgaria",
+    "🇨🇭 Switzerland",
+    "🇨🇿 Czechia",
+    "🇩🇪 Germany",
+    "🇩🇰 Denmark",
+    "🇪🇪 Estonia",
+    "🇪🇸 Spain",
+    "🇫🇮 Finland",
+    "🇫🇷 France",
+    "🇬🇧 United Kingdom of Great Britain and Northern Ireland",
+    "🇬🇷 Greece",
+    "🇭🇷 Croatia",
+    "🇭🇺 Hungary",
+    "🇮🇹 Italy",
+    "🇱🇹 Lithuania",
+    "🇲🇩 Moldova (Republic of)",
+    "🇲🇪 Montenegro",
+    "🇲🇰 North Macedonia",
+    "🇳🇱 Netherlands",
+    "🇳🇴 Norway",
+    "🇵🇱 Poland",
+    "🇵🇹 Portugal",
+    "🇷🇴 Romania",
+    "🇸🇪 Sweden",
+    "🇸🇮 Slovenia",
+    "🇸🇰 Slovakia",
+    "and 🇺🇦 Ukraine"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Java",
+    "PostgreSQL",
+    "and Spring",
+    "Back-End Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-09-17T10:51:23+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "twikey|senior java developer"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Software Engineer, Infrastructure Platform",
+   "company": "Lattice",
+   "url": "https://weworkremotely.com/remote-jobs/lattice-senior-software-engineer-infrastructure-platform",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-10-15T07:31:21+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "lattice|senior software engineer infrastructure platform"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Infrastructure Engineer",
+   "company": "Webflow",
+   "url": "https://weworkremotely.com/remote-jobs/webflow-senior-infrastructure-engineer",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-10-06T07:31:05+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "webflow|senior infrastructure engineer"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Full-Stack Developer - Marketplace Web & Mobile Platform",
+   "company": "Adventure Travel 365",
+   "url": "https://weworkremotely.com/remote-jobs/adventure-travel-365-senior-full-stack-developer-marketplace-web-mobile-platform",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Database",
+    "Full Stack Dev",
+    "API Development",
+    "Mobile App Dev",
+    "and Ecommerce Web Development",
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-09-21T10:14:35+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "adventure travel 365|senior full stack developer marketplace web mobile platform"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Data Engineer – AWS Data Lake & Pipeline Architecture",
+   "company": "Toptal",
+   "url": "https://weworkremotely.com/remote-jobs/toptal-senior-data-engineer-aws-data-lake-pipeline-architecture",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-09-15T12:53:09+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "toptal|senior data engineer aws data lake pipeline architecture"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Software Engineer, remote",
+   "company": "Edfinity",
+   "url": "https://weworkremotely.com/remote-jobs/edfinity-senior-software-engineer-remote",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World",
+    "🇺🇸 United States of America"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Ruby on Rails",
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-08-17T19:21:19+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "edfinity|senior software engineer remote"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Staff Software Engineer",
+   "company": "Samsara",
+   "url": "https://weworkremotely.com/remote-jobs/samsara-staff-software-engineer",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World",
+    "🇺🇸 United States of America"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2026-08-17T13:57:14+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "samsara|staff software engineer"
+  },
+  {
+   "source": "weworkremotely-fullstack",
+   "title": "Senior Shopify Developer (Remote + Flexible)",
+   "company": "Storetasker",
+   "url": "https://weworkremotely.com/remote-jobs/storetasker-senior-shopify-developer-remote-flexible-3",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "Full-Stack Programming"
+   ],
+   "seniority": [],
+   "posted": "2024-05-13T03:14:30+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "storetasker|senior shopify developer remote + flexible"
+  },
+  {
+   "source": "weworkremotely-devops",
+   "title": "Senior Engineer (.NET)",
+   "company": "Current",
+   "url": "https://weworkremotely.com/remote-jobs/current-senior-engineer-net",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "DevOps and Sysadmin"
+   ],
+   "seniority": [],
+   "posted": "2026-10-12T07:31:11+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "current|senior engineer net"
+  },
+  {
+   "source": "weworkremotely-devops",
+   "title": "Principal Infrastructure Architect: Data Platform",
+   "company": "ZoomInfo Technologies LLC",
+   "url": "https://weworkremotely.com/remote-jobs/zoominfo-technologies-llc-principal-infrastructure-architect-data-platform",
+   "location": "Anywhere in the World",
+   "remote": true,
+   "regions": [
+    "Anywhere in the World"
+   ],
+   "salary_min": null,
+   "salary_max": null,
+   "currency": null,
+   "salary_period": "year",
+   "tags": [
+    "DevOps and Sysadmin"
+   ],
+   "seniority": [],
+   "posted": "2026-09-29T07:30:41+00:00",
+   "salary_eur_max": null,
+   "score": 1.0,
+   "notes": [
+    "salary not stated"
+   ],
+   "key": "zoominfo technologies|principal infrastructure architect data platform"
+  }
+ ]
+}
