@@ -137,7 +137,7 @@ python -m alikindoi status
 ## Tests
 
 ```bash
-cd backend && .venv/bin/pytest     # 150+ unit & integration tests
+cd backend && .venv/bin/pytest     # ~150 unit & integration tests
 cd frontend && npm run lint && npm run build
 ```
 
