@@ -1,0 +1,245 @@
+app:
+  database_url: sqlite:///data/alikindoi.db
+  missing_runs_threshold: 2
+  inactive_grace_days: 30
+  recheck_hours: 24
+criteria:
+  enabled: true
+  min_salary_eur: 48000
+  keep_unknown_salary: true
+  seniority:
+  - senior
+  - lead
+  role_keywords:
+  - software
+  - engineer
+  - engineering
+  - developer
+  - programmer
+  - robotics
+  - robot
+  - ros
+  - c++
+  - embedded
+  - backend
+  - back-end
+  - full stack
+  - fullstack
+  - computer vision
+  - perception
+  - autonomy
+  - firmware
+  - platform
+  - systems
+  - architect
+  - sre
+  - devops
+  exclude_title_keywords:
+  - junior
+  - intern
+  - internship
+  - trainee
+  - graduate
+  - becario
+  - sales
+  - recruiter
+  - marketing
+  - account executive
+  - customer support
+  - business development
+  - teacher
+  - profesor
+  boost_keywords:
+  - robotics
+  - ros
+  - ros 2
+  - ros2
+  - c++
+  - perception
+  - slam
+  - autonomous
+  - computer vision
+  - embedded
+  - motion planning
+  - python
+  location:
+    remote_allowed_regions:
+    - spain
+    - españa
+    - europe
+    - eu
+    - emea
+    - cet
+    - worldwide
+    - anywhere
+    - global
+    - international
+    hybrid_cities:
+    - malaga
+    - málaga
+    - seville
+    - sevilla
+  fx_to_eur:
+    EUR: 1.0
+    USD: 0.92
+    GBP: 1.17
+    CHF: 1.05
+    CAD: 0.67
+    AUD: 0.6
+    PLN: 0.23
+    SEK: 0.088
+rate_limits:
+  min_interval_minutes:
+    indeed: 360
+    google: 360
+    linkedin: 720
+    glassdoor: 360
+    zip_recruiter: 360
+    adzuna: 360
+    remotive: 360
+    themuse: 360
+    himalayas: 360
+    remoteok: 360
+    jobicy: 360
+    arbeitnow: 360
+    weworkremotely: 360
+  jitter_seconds_min: 2
+  jitter_seconds_max: 8
+  max_results_per_source: 100
+  backoff_base_seconds: 60
+sources:
+  jobspy:
+    indeed:
+      enabled: true
+    google:
+      enabled: false
+    linkedin:
+      enabled: true
+    glassdoor:
+      enabled: false
+    zip_recruiter:
+      enabled: false
+  apis:
+    adzuna:
+      enabled: true
+    remotive:
+      enabled: true
+    themuse:
+      enabled: true
+    himalayas:
+      enabled: true
+    remoteok:
+      enabled: true
+    jobicy:
+      enabled: true
+    arbeitnow:
+      enabled: true
+    weworkremotely:
+      enabled: true
+search_profiles:
+- name: senior-software-remote
+  enabled: true
+  search_term: senior software engineer
+  google_search_term: senior software engineer remote Spain
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - software
+  results_wanted: 50
+  hours_old: 72
+  runs_per_day: 4
+- name: robotics-remote
+  enabled: true
+  search_term: robotics engineer
+  google_search_term: robotics engineer remote Spain
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - robotics
+  results_wanted: 50
+  hours_old: 72
+  runs_per_day: 4
+- name: cpp-remote
+  enabled: true
+  search_term: senior "c++" engineer
+  google_search_term: senior c++ engineer remote Spain
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - c++
+  results_wanted: 50
+  hours_old: 72
+  runs_per_day: 4
+- name: ros-remote
+  enabled: true
+  search_term: ros robotics software
+  google_search_term: null
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - robotics
+  - ros
+  results_wanted: 50
+  hours_old: 72
+  runs_per_day: 2
+- name: python-remote
+  enabled: true
+  search_term: senior python developer
+  google_search_term: null
+  location: Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: true
+  job_type: fulltime
+  tags:
+  - python
+  results_wanted: 50
+  hours_old: 72
+  runs_per_day: 4
+- name: malaga-hybrid
+  enabled: true
+  search_term: senior software engineer (python OR "c++" OR robotics)
+  google_search_term: senior software engineer jobs in Málaga Spain
+  location: Málaga, Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: false
+  job_type: fulltime
+  tags:
+  - malaga
+  - hybrid
+  results_wanted: 50
+  hours_old: 168
+  runs_per_day: 2
+- name: sevilla-hybrid
+  enabled: true
+  search_term: senior software engineer (python OR "c++" OR robotics)
+  google_search_term: senior software engineer jobs in Sevilla Spain
+  location: Sevilla, Spain
+  country_indeed: Spain
+  adzuna_country: es
+  is_remote: false
+  job_type: fulltime
+  tags:
+  - sevilla
+  - hybrid
+  results_wanted: 50
+  hours_old: 168
+  runs_per_day: 2
+notifications:
+  on_new_job: true
+  on_removed_job: true
+  on_salary_change: false
+  digest: immediate
