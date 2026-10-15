@@ -1,0 +1,4 @@
+{"jobs": [{"title": "Senior Robotics Software Engineer", "companyName": "Acme Robotics", "minSalary": 70000, "maxSalary": 90000,
+  "salaryPeriod": "annual", "seniority": ["Senior"], "currency": "EUR", "locationRestrictions": ["Spain"],
+  "categories": ["Robotics", "C++"], "description": "<p>ROS 2 and C++</p>", "pubDate": 1792003374,
+  "applicationLink": "https://himalayas.app/companies/acme/jobs/senior-robotics", "guid": "https://himalayas.app/companies/acme/jobs/senior-robotics"}]}
