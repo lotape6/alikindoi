@@ -27,12 +27,18 @@ touching scraping code, these rules override any feature request.
 
 ## Data trust rules
 
-- Jobs are tombstoned (`is_active=False`), never deleted; removal requires
-  `missing_runs_threshold` missed runs AND a failed URL probe
-  (`sync._probe_removed`).
+- Jobs are tombstoned (`is_active=False`), never deleted. A listing closes
+  (`sync.close_listing`) after `missing_runs_threshold` missed runs AND a
+  failed URL probe (`sync._probe_removed`), or when the board's own expiry
+  date has passed, or when no search has listed it for
+  `inactive_grace_days` (boards whose pages can't be probed would otherwise
+  never close). A position closes only when all its listings have.
+- Pipeline postings are re-probed by `sync.check_closed` at most once per
+  `recheck_hours`, with a delay between probes and a per-sweep cap.
 - Every Job mutation appends a `job_events` row (types: discovered,
   reconfirmed, salary_changed, description_changed, removed, reappeared,
-  applied, status_changed, dedup_alias, enriched).
+  applied, status_changed, dedup_alias, enriched, listing_added,
+  listing_closed, follow_up_set, closed, reopened, edited).
 - Enrichment (salary_parser, textnorm) must be idempotent: applied before
   content hashing so hashes stay stable across runs.
 

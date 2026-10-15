@@ -6,6 +6,8 @@ tracks your application for each one, and closes positions automatically
 when they stop being listed. Everything is browsed and managed from a web
 dashboard.
 
+![Open positions with the detail panel](docs/screenshots/position-detail.png)
+
 ## Features
 
 - **Boards**: LinkedIn, Indeed, Glassdoor, Google Jobs, ZipRecruiter (via
@@ -39,6 +41,10 @@ dashboard.
   (LinkedIn ≥ 12 h), jitter, results caps, no aggressive retries.
 - **Notifications**: Telegram, Discord webhook, email (immediate or daily
   digest), configured via `.env`.
+
+| Positions | Pipeline |
+|---|---|
+| ![Positions](docs/screenshots/positions.png) | ![Pipeline](docs/screenshots/pipeline.png) |
 
 ## Quick start (Docker)
 
